@@ -1,0 +1,737 @@
+# GUIBUILDER FILE Build 146
+# Created: 2011-07-22 16:58:47 by GUI Builder Build 146
+language tcl 8.4
+widget {Tk frame} f {
+	geometry min_column {40 40}
+	geometry min_row {16 48 8 2 2 2 2 40 2}
+	geometry pad_column {0 0}
+	geometry pad_row {0 0 0 0 0 0 0 0 0}
+	geometry resize_column {0 3}
+	geometry resize_row {0 0 0 0 0 0 0 0 0}
+	geometry weight_column {0 1}
+	geometry weight_row {0 0 0 0 0 0 0 0 0}
+	data GROUP Tk
+	data ID {}
+	data MASTER {}
+	data TYPE {Tk frame}
+	data level 0
+}
+widget {Tk frame} _frame_1 {
+	geometry -column 2
+	geometry -columnspan 1
+	geometry -row 5
+	geometry -rowspan 1
+	geometry -sticky ew
+	geometry min_column {40 40 40 40}
+	geometry min_row 4
+	geometry pad_column {0 0 0 0}
+	geometry pad_row 0
+	geometry resize_column {0 0 0 3}
+	geometry resize_row 0
+	geometry weight_column {0 0 0 1}
+	geometry weight_row 0
+	data GROUP Tk
+	data ID _frame_1
+	data MASTER {}
+	data TYPE {Tk frame}
+	data level 1
+}
+widget {Tk frame} _frame_2 {
+	geometry -column 2
+	geometry -columnspan 1
+	geometry -row 9
+	geometry -rowspan 1
+	geometry -sticky news
+	geometry min_column {2 40}
+	geometry min_row 2
+	geometry pad_column {0 0}
+	geometry pad_row 0
+	geometry resize_column {3 3}
+	geometry resize_row 0
+	geometry weight_column {1 1}
+	geometry weight_row 0
+	data GROUP Tk
+	data ID _frame_2
+	data MASTER {}
+	data TYPE {Tk frame}
+	data level 1
+}
+widget {Tk frame} _frame_3 {
+	geometry -column 2
+	geometry -columnspan 1
+	geometry -row 6
+	geometry -rowspan 1
+	geometry -sticky news
+	geometry min_column {40 40 40 40 40 40 40}
+	geometry min_row 22
+	geometry pad_column {0 0 0 0 0 0 0}
+	geometry pad_row 0
+	geometry resize_column {0 0 0 0 0 3 0}
+	geometry resize_row 0
+	geometry weight_column {0 0 0 0 0 1 0}
+	geometry weight_row 0
+	data GROUP Tk
+	data ID _frame_3
+	data MASTER {}
+	data TYPE {Tk frame}
+	data level 1
+}
+widget {Tk frame} _frame_4 {
+	geometry -column 2
+	geometry -columnspan 1
+	geometry -row 7
+	geometry -rowspan 1
+	geometry -sticky news
+	geometry min_column {40 40 40 40 40 40 40}
+	geometry min_row 3
+	geometry pad_column {0 0 0 0 0 0 0}
+	geometry pad_row 0
+	geometry resize_column {0 0 0 0 0 3 0}
+	geometry resize_row 0
+	geometry weight_column {0 0 0 0 0 1 0}
+	geometry weight_row 0
+	data GROUP Tk
+	data ID _frame_4
+	data MASTER {}
+	data TYPE {Tk frame}
+	data level 1
+}
+widget {Tk label} _label_1 {
+	configure -font {helvetica 10 bold}
+	configure -text {VMD Diffusion Coefficient Tool}
+	geometry -column 1
+	geometry -columnspan 2
+	geometry -row 1
+	geometry -rowspan 1
+	geometry -sticky {}
+	geometry min_column {2 40}
+	geometry min_row 2
+	geometry pad_column {0 0}
+	geometry pad_row 0
+	geometry resize_column {3 3}
+	geometry resize_row 0
+	geometry weight_column {1 1}
+	geometry weight_row 0
+	data GROUP Tk
+	data ID _label_1
+	data MASTER {}
+	data TYPE {Tk label}
+}
+widget {Tk label} _label_2 {
+	configure -font {helvetica 10}
+	configure -text {© 2011 Universitat Pompeu Fabra\nToni Giorgino - www.multiscalelab.org}
+	geometry -column 1
+	geometry -columnspan 2
+	geometry -row 2
+	geometry -rowspan 1
+	geometry -sticky n
+	geometry min_column {2 40}
+	geometry min_row 2
+	geometry pad_column {0 0}
+	geometry pad_row 0
+	geometry resize_column {3 3}
+	geometry resize_row 0
+	geometry weight_column {1 1}
+	geometry weight_row 0
+	data GROUP Tk
+	data ID _label_2
+	data MASTER {}
+	data TYPE {Tk label}
+}
+widget {Tk label} _label_3 {
+	configure -font {helvetica 10}
+	configure -text {Selection (one atom per molecule)}
+	geometry -column 1
+	geometry -columnspan 1
+	geometry -row 3
+	geometry -rowspan 1
+	geometry -sticky e
+	geometry min_column {2 40}
+	geometry min_row 2
+	geometry pad_column {0 0}
+	geometry pad_row 0
+	geometry resize_column {3 3}
+	geometry resize_row 0
+	geometry weight_column {1 1}
+	geometry weight_row 0
+	data GROUP Tk
+	data ID _label_3
+	data MASTER {}
+	data TYPE {Tk label}
+}
+widget {Tk entry} _entry_1 {
+	configure -textvariable diffusion_coefficient_gui::selection
+	configure -width 30
+	geometry -column 2
+	geometry -columnspan 1
+	geometry -row 3
+	geometry -rowspan 1
+	geometry -sticky ew
+	geometry min_column {2 40}
+	geometry min_row 2
+	geometry pad_column {0 0}
+	geometry pad_row 0
+	geometry resize_column {3 3}
+	geometry resize_row 0
+	geometry weight_column {1 1}
+	geometry weight_row 0
+	data GROUP Tk
+	data ID _entry_1
+	data MASTER {}
+	data TYPE {Tk entry}
+}
+widget {Tk label} _label_4 {
+	configure -font {helvetica 10}
+	configure -text {Real time between frames (ps)}
+	geometry -column 1
+	geometry -columnspan 1
+	geometry -row 4
+	geometry -rowspan 1
+	geometry -sticky e
+	geometry min_column {2 40}
+	geometry min_row 2
+	geometry pad_column {0 0}
+	geometry pad_row 0
+	geometry resize_column {3 3}
+	geometry resize_row 0
+	geometry weight_column {1 1}
+	geometry weight_row 0
+	data GROUP Tk
+	data ID _label_4
+	data MASTER {}
+	data TYPE {Tk label}
+}
+widget {Tk entry} _entry_2 {
+	configure -justify center
+	configure -textvariable diffusion_coefficient_gui::dt
+	configure -width 6
+	geometry -column 2
+	geometry -columnspan 1
+	geometry -row 4
+	geometry -rowspan 1
+	geometry -sticky w
+	geometry min_column {2 40}
+	geometry min_row 2
+	geometry pad_column {0 0}
+	geometry pad_row 0
+	geometry resize_column {3 3}
+	geometry resize_row 0
+	geometry weight_column {1 1}
+	geometry weight_row 0
+	data GROUP Tk
+	data ID _entry_2
+	data MASTER {}
+	data TYPE {Tk entry}
+}
+widget {Tk label} _label_5 {
+	configure -font {helvetica 10}
+	configure -text {Diffusion along}
+	geometry -column 1
+	geometry -columnspan 1
+	geometry -row 5
+	geometry -rowspan 1
+	geometry -sticky e
+	geometry min_column {2 40}
+	geometry min_row 2
+	geometry pad_column {0 0}
+	geometry pad_row 0
+	geometry resize_column {3 3}
+	geometry resize_row 0
+	geometry weight_column {1 1}
+	geometry weight_row 0
+	data GROUP Tk
+	data ID _label_5
+	data MASTER {}
+	data TYPE {Tk label}
+}
+widget {Tk checkbutton} _checkbutton_1 {
+	configure -font {helvetica 10}
+	configure -text x
+	configure -variable diffusion_coefficient_gui::alongx
+	geometry -column 1
+	geometry -columnspan 1
+	geometry -row 1
+	geometry -rowspan 1
+	geometry -sticky {}
+	geometry min_column {2 40}
+	geometry min_row 2
+	geometry pad_column {0 0}
+	geometry pad_row 0
+	geometry resize_column {3 3}
+	geometry resize_row 0
+	geometry weight_column {1 1}
+	geometry weight_row 0
+	data GROUP Tk
+	data ID _checkbutton_1
+	data MASTER _frame_1
+	data TYPE {Tk checkbutton}
+}
+widget {Tk checkbutton} _checkbutton_2 {
+	configure -font {helvetica 10}
+	configure -text y
+	configure -variable diffusion_coefficient_gui::alongy
+	geometry -column 2
+	geometry -columnspan 1
+	geometry -row 1
+	geometry -rowspan 1
+	geometry -sticky {}
+	geometry min_column {2 40}
+	geometry min_row 2
+	geometry pad_column {0 0}
+	geometry pad_row 0
+	geometry resize_column {3 3}
+	geometry resize_row 0
+	geometry weight_column {1 1}
+	geometry weight_row 0
+	data GROUP Tk
+	data ID _checkbutton_2
+	data MASTER _frame_1
+	data TYPE {Tk checkbutton}
+}
+widget {Tk checkbutton} _checkbutton_3 {
+	configure -font {helvetica 10}
+	configure -takefocus 1
+	configure -text z
+	configure -variable diffusion_coefficient_gui::alongz
+	geometry -column 3
+	geometry -columnspan 1
+	geometry -row 1
+	geometry -rowspan 1
+	geometry -sticky {}
+	geometry min_column {2 40}
+	geometry min_row 2
+	geometry pad_column {0 0}
+	geometry pad_row 0
+	geometry resize_column {3 3}
+	geometry resize_row 0
+	geometry weight_column {1 1}
+	geometry weight_row 0
+	data GROUP Tk
+	data ID _checkbutton_3
+	data MASTER _frame_1
+	data TYPE {Tk checkbutton}
+}
+widget {Tk label} _label_7 {
+	configure -font {helvetica 10}
+	configure -text {Generate plot for}
+	geometry -column 1
+	geometry -columnspan 1
+	geometry -row 9
+	geometry -rowspan 1
+	geometry -sticky e
+	geometry min_column {2 40}
+	geometry min_row 2
+	geometry pad_column {0 0}
+	geometry pad_row 0
+	geometry resize_column {3 3}
+	geometry resize_row 0
+	geometry weight_column {1 1}
+	geometry weight_row 0
+	data GROUP Tk
+	data ID _label_7
+	data MASTER {}
+	data TYPE {Tk label}
+}
+widget {Tk button} _button_3 {
+	configure -text {MSD displacement}
+	geometry -column 1
+	geometry -columnspan 1
+	geometry -row 1
+	geometry -rowspan 1
+	geometry -sticky nsew
+	geometry min_column {2 40}
+	geometry min_row 2
+	geometry pad_column {0 0}
+	geometry pad_row 0
+	geometry resize_column {3 3}
+	geometry resize_row 0
+	geometry weight_column {1 1}
+	geometry weight_row 0
+	data GROUP Tk
+	data ID plot_msd_button
+	data MASTER _frame_2
+	data TYPE {Tk button}
+}
+widget {Tk button} _button_4 {
+	configure -text {Diffusion coefficient}
+	geometry -column 2
+	geometry -columnspan 1
+	geometry -row 1
+	geometry -rowspan 1
+	geometry -sticky nsew
+	geometry min_column {2 40}
+	geometry min_row 2
+	geometry pad_column {0 0}
+	geometry pad_row 0
+	geometry resize_column {3 3}
+	geometry resize_row 0
+	geometry weight_column {1 1}
+	geometry weight_row 0
+	data GROUP Tk
+	data ID plot_d_button
+	data MASTER _frame_2
+	data TYPE {Tk button}
+}
+widget {Tk label} _label_6 {
+	configure -font {helvetica 10}
+	configure -text {Compute MSD at lag times from}
+	geometry -column 1
+	geometry -columnspan 1
+	geometry -row 6
+	geometry -rowspan 1
+	geometry -sticky e
+	geometry min_column {2 40}
+	geometry min_row 2
+	geometry pad_column {0 0}
+	geometry pad_row 0
+	geometry resize_column {3 3}
+	geometry resize_row 0
+	geometry weight_column {1 1}
+	geometry weight_row 0
+	data GROUP Tk
+	data ID _label_6
+	data MASTER {}
+	data TYPE {Tk label}
+}
+widget {Tk entry} _entry_3 {
+	configure -justify center
+	configure -textvariable diffusion_coefficient_gui::from
+	configure -width 6
+	geometry -column 1
+	geometry -columnspan 1
+	geometry -row 1
+	geometry -rowspan 1
+	geometry -sticky ew
+	geometry min_column {2 40}
+	geometry min_row 2
+	geometry pad_column {0 0}
+	geometry pad_row 0
+	geometry resize_column {3 3}
+	geometry resize_row 0
+	geometry weight_column {1 1}
+	geometry weight_row 0
+	data GROUP Tk
+	data ID _entry_3
+	data MASTER _frame_3
+	data TYPE {Tk entry}
+}
+widget {Tk label} _label_8 {
+	configure -font {helvetica 10}
+	configure -text to
+	geometry -column 2
+	geometry -columnspan 1
+	geometry -row 1
+	geometry -rowspan 1
+	geometry -sticky {}
+	geometry min_column {2 40}
+	geometry min_row 2
+	geometry pad_column {0 0}
+	geometry pad_row 0
+	geometry resize_column {3 3}
+	geometry resize_row 0
+	geometry weight_column {1 1}
+	geometry weight_row 0
+	data GROUP Tk
+	data ID _label_8
+	data MASTER _frame_3
+	data TYPE {Tk label}
+}
+widget {Tk entry} _entry_4 {
+	configure -justify center
+	configure -textvariable diffusion_coefficient_gui::to
+	configure -width 6
+	geometry -column 3
+	geometry -columnspan 1
+	geometry -row 1
+	geometry -rowspan 1
+	geometry -sticky ew
+	geometry min_column {2 40}
+	geometry min_row 2
+	geometry pad_column {0 0}
+	geometry pad_row 0
+	geometry resize_column {3 3}
+	geometry resize_row 0
+	geometry weight_column {1 1}
+	geometry weight_row 0
+	data GROUP Tk
+	data ID _entry_4
+	data MASTER _frame_3
+	data TYPE {Tk entry}
+}
+widget {Tk entry} _entry_5 {
+	configure -justify center
+	configure -textvariable diffusion_coefficient_gui::step
+	configure -width 6
+	geometry -column 5
+	geometry -columnspan 1
+	geometry -row 1
+	geometry -rowspan 1
+	geometry -sticky ew
+	geometry min_column {2 40}
+	geometry min_row 2
+	geometry pad_column {0 0}
+	geometry pad_row 0
+	geometry resize_column {3 3}
+	geometry resize_row 0
+	geometry weight_column {1 1}
+	geometry weight_row 0
+	data GROUP Tk
+	data ID _entry_5
+	data MASTER _frame_3
+	data TYPE {Tk entry}
+}
+widget {Tk label} _label_9 {
+	configure -font {helvetica 10}
+	configure -text step
+	geometry -column 4
+	geometry -columnspan 1
+	geometry -row 1
+	geometry -rowspan 1
+	geometry -sticky {}
+	geometry min_column {2 40}
+	geometry min_row 2
+	geometry pad_column {0 0}
+	geometry pad_row 0
+	geometry resize_column {3 3}
+	geometry resize_row 0
+	geometry weight_column {1 1}
+	geometry weight_row 0
+	data GROUP Tk
+	data ID _label_9
+	data MASTER _frame_3
+	data TYPE {Tk label}
+}
+widget {Tk label} _label_10 {
+	configure -font {helvetica 10}
+	configure -text {frames   }
+	geometry -column 6
+	geometry -columnspan 1
+	geometry -row 1
+	geometry -rowspan 1
+	geometry -sticky w
+	geometry min_column {2 40}
+	geometry min_row 2
+	geometry pad_column {0 0}
+	geometry pad_row 0
+	geometry resize_column {3 3}
+	geometry resize_row 0
+	geometry weight_column {1 1}
+	geometry weight_row 0
+	data GROUP Tk
+	data ID _label_10
+	data MASTER _frame_3
+	data TYPE {Tk label}
+}
+widget {Tk label} _label_11 {
+	configure -font {helvetica 10}
+	configure -text {Analysis interval from}
+	geometry -column 1
+	geometry -columnspan 1
+	geometry -row 7
+	geometry -rowspan 1
+	geometry -sticky e
+	geometry min_column {2 40}
+	geometry min_row 2
+	geometry pad_column {0 0}
+	geometry pad_row 0
+	geometry resize_column {3 3}
+	geometry resize_row 0
+	geometry weight_column {1 1}
+	geometry weight_row 0
+	data GROUP Tk
+	data ID _label_11
+	data MASTER {}
+	data TYPE {Tk label}
+}
+widget {Tk label} _label_12 {
+	configure -font {helvetica 10}
+	configure -text {frames   }
+	geometry -column 6
+	geometry -columnspan 1
+	geometry -row 1
+	geometry -rowspan 1
+	geometry -sticky w
+	geometry min_column {2 40}
+	geometry min_row 2
+	geometry pad_column {0 0}
+	geometry pad_row 0
+	geometry resize_column {3 3}
+	geometry resize_row 0
+	geometry weight_column {1 1}
+	geometry weight_row 0
+	data GROUP Tk
+	data ID _label_12
+	data MASTER _frame_4
+	data TYPE {Tk label}
+}
+widget {Tk entry} _entry_6 {
+	configure -justify center
+	configure -textvariable diffusion_coefficient_gui::window_from
+	configure -width 6
+	geometry -column 1
+	geometry -columnspan 1
+	geometry -row 1
+	geometry -rowspan 1
+	geometry -sticky ew
+	geometry min_column {2 40}
+	geometry min_row 2
+	geometry pad_column {0 0}
+	geometry pad_row 0
+	geometry resize_column {3 3}
+	geometry resize_row 0
+	geometry weight_column {1 1}
+	geometry weight_row 0
+	data GROUP Tk
+	data ID _entry_6
+	data MASTER _frame_4
+	data TYPE {Tk entry}
+}
+widget {Tk label} _label_13 {
+	configure -font {helvetica 10}
+	configure -text Ready
+	configure -textvariable diffusion_coefficient_gui::status
+	geometry -column 1
+	geometry -columnspan 2
+	geometry -row 8
+	geometry -rowspan 1
+	geometry -sticky {}
+	geometry min_column {2 40}
+	geometry min_row 2
+	geometry pad_column {0 0}
+	geometry pad_row 0
+	geometry resize_column {3 3}
+	geometry resize_row 0
+	geometry weight_column {1 1}
+	geometry weight_row 0
+	data GROUP Tk
+	data ID _label_13
+	data MASTER {}
+	data TYPE {Tk label}
+}
+widget {Tk label} _label_14 {
+	configure -font {helvetica 10}
+	configure -text to
+	geometry -column 2
+	geometry -columnspan 1
+	geometry -row 1
+	geometry -rowspan 1
+	geometry -sticky {}
+	geometry min_column {2 40}
+	geometry min_row 2
+	geometry pad_column {0 0}
+	geometry pad_row 0
+	geometry resize_column {3 3}
+	geometry resize_row 0
+	geometry weight_column {1 1}
+	geometry weight_row 0
+	data GROUP Tk
+	data ID _label_14
+	data MASTER _frame_4
+	data TYPE {Tk label}
+}
+widget {Tk entry} _entry_7 {
+	configure -justify center
+	configure -textvariable diffusion_coefficient_gui::window_to
+	configure -width 6
+	geometry -column 3
+	geometry -columnspan 1
+	geometry -row 1
+	geometry -rowspan 1
+	geometry -sticky ew
+	geometry min_column {2 40}
+	geometry min_row 2
+	geometry pad_column {0 0}
+	geometry pad_row 0
+	geometry resize_column {3 3}
+	geometry resize_row 0
+	geometry weight_column {1 1}
+	geometry weight_row 0
+	data GROUP Tk
+	data ID _entry_7
+	data MASTER _frame_4
+	data TYPE {Tk entry}
+}
+widget {Tk label} _label_15 {
+	configure -font {helvetica 10}
+	configure -text step
+	geometry -column 4
+	geometry -columnspan 1
+	geometry -row 1
+	geometry -rowspan 1
+	geometry -sticky {}
+	geometry min_column {2 40}
+	geometry min_row 2
+	geometry pad_column {0 0}
+	geometry pad_row 0
+	geometry resize_column {3 3}
+	geometry resize_row 0
+	geometry weight_column {1 1}
+	geometry weight_row 0
+	data GROUP Tk
+	data ID _label_15
+	data MASTER _frame_4
+	data TYPE {Tk label}
+}
+widget {Tk entry} _entry_8 {
+	configure -justify center
+	configure -textvariable diffusion_coefficient_gui::window_every
+	configure -width 6
+	geometry -column 5
+	geometry -columnspan 1
+	geometry -row 1
+	geometry -rowspan 1
+	geometry -sticky ew
+	geometry min_column {2 40}
+	geometry min_row 2
+	geometry pad_column {0 0}
+	geometry pad_row 0
+	geometry resize_column {3 3}
+	geometry resize_row 0
+	geometry weight_column {1 1}
+	geometry weight_row 0
+	data GROUP Tk
+	data ID _entry_8
+	data MASTER _frame_4
+	data TYPE {Tk entry}
+}
+widget {Tk checkbutton} _checkbutton_4 {
+	configure -font {helvetica 10}
+	configure -text {Remove COM drift}
+	configure -variable diffusion_coefficient_gui::remove_drift
+	geometry -column 4
+	geometry -columnspan 1
+	geometry -row 1
+	geometry -rowspan 1
+	geometry -sticky ew
+	data GROUP Tk
+	data ID _checkbutton_4
+	data MASTER _frame_1
+	data TYPE {Tk checkbutton}
+}
+widget {Tk button} _button_1 {
+	configure -font {helvetica 10}
+	configure -text Defaults
+	geometry -column 7
+	geometry -columnspan 1
+	geometry -row 1
+	geometry -rowspan 1
+	geometry -sticky {}
+	data GROUP Tk
+	data ID reset_lags_button
+	data MASTER _frame_3
+	data TYPE {Tk button}
+}
+widget {Tk button} _button_2 {
+	configure -font {helvetica 10}
+	configure -text Defaults
+	geometry -column 7
+	geometry -columnspan 1
+	geometry -row 1
+	geometry -rowspan 1
+	geometry -sticky {}
+	data GROUP Tk
+	data ID reset_interval_button
+	data MASTER _frame_4
+	data TYPE {Tk button}
+}
+
