@@ -1,5 +1,5 @@
 # GUIBUILDER FILE Build 146
-# Created: 2012-12-14 15:59:34 by GUI Builder Build 146
+# Created: 2012-12-14 16:59:04 by GUI Builder Build 146
 language tcl 8.4
 widget {Tk frame} f {
 	geometry min_column {40 40}
@@ -125,7 +125,7 @@ coefficients of a chosen molecular species.}
 	geometry -columnspan 2
 	geometry -row 2
 	geometry -rowspan 1
-	geometry -sticky n
+	geometry -sticky {}
 	geometry min_column {2 40}
 	geometry min_row 2
 	geometry pad_column {0 0}
@@ -590,7 +590,7 @@ widget {Tk entry} _entry_6 {
 widget {Tk label} _label_13 {
 	configure -font {helvetica 10}
 	configure -text Ready
-	configure -textvariable diffusion_coefficient_gui::status
+	configure -textvariable diffusion_coefficient::status_text
 	geometry -column 1
 	geometry -columnspan 2
 	geometry -row 8

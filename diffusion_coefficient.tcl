@@ -7,17 +7,17 @@ namespace eval ::diffusion_coefficient:: {
     variable arg
     variable arg_defaults {
 	selection "water and name OH"
-	dt        1
-	alongx 1  
-	alongy 1 
-	alongz 1
-	remove_drift 1
-	from 0
-	to   0
-	step 1
-	window_from 0
-	window_to   0
-	window_every 1
+	dt		1
+	alongx		1  
+	alongy		1 
+	alongz		1
+	remove_drift	1
+	from		0
+	to		last
+	step		1
+	window_from	0
+	window_to	last
+	window_every	1
     }
     array set arg $arg_defaults
 
@@ -25,7 +25,67 @@ namespace eval ::diffusion_coefficient:: {
     variable arg_list {selection dt alongx alongy alongz remove_drift 
 	from to step  window_from window_to window_every  }
 
+    # Status text, bound by the GUI, otherwise unused
+    variable status_text
 }
+
+
+# User-accessible proc
+proc diffusion_coefficient { args } { return [eval ::diffusion_coefficient::diffusion_coefficient $args] }
+
+
+# Help
+proc ::diffusion_coefficient::diffusion_coefficient_usage { } {
+    variable arg
+    variable arg_list
+    puts "VMD Diffusion Coefficient tool. Computes one, two or three-dimensional"
+    puts "MSD-based diffusion coefficients of a chosen molecular species. "
+    puts " "
+    puts "Usage: diffusion_coefficient <args>"
+    puts "Args (with defaults):"
+    foreach k $arg_list {
+	puts "   -$k $arg($k)"
+    }
+    puts " "
+    puts "See documentation at http://multiscalelab.org/utilities/DiffusionCoefficientTool"
+}
+
+
+# Command line parsing (sets namespace variables). TODO: allow short
+# substrings, e.g. -sel
+proc ::diffusion_coefficient::parse_args {args} {
+    variable dp_args
+    foreach {a v} $args {
+	if {![regexp {^-} $a]} {
+	    error "Argument should start with -: $a"
+	} 
+	set a [string trimleft $a -]
+	if {![info exists dp_args($a)]} {
+	    error "Unknown argument: $a"
+	} 
+	set dp_args($a) $v
+    }
+}
+
+
+# Main entry point. 
+proc ::diffusion_coefficient::diffusion_coefficient {args} {
+    variable arg
+    variable arg_defaults
+    array set arg $arg_defaults
+    if {[llength $args]==0} {
+	diffusion_coefficient_usage
+	return
+    } 
+    eval parse_args $args
+    parray arg
+
+    check_selection
+
+    # Compute the bare histogram
+
+}
+
 
 
 # Performs sanity checks on selection
@@ -48,7 +108,8 @@ proc diffusion_coefficient::check_selection {} {
 
 # Uses class-variables xt, yt, zt
 proc diffusion_coefficient::msd_between {t0 t1 } {
-    variable alongx; variable alongy; variable alongz
+    set alongx $arg(alongx); set alongy $arg(alongy); set alongz $arg(alongz)
+
     variable xt;   variable yt;   variable zt
 
     set N [llength [lindex $xt 0]]
@@ -72,6 +133,8 @@ proc diffusion_coefficient::msd_between {t0 t1 } {
     return $msd
 }
 
+
+
 # Return a zero-centered version of the input list
 proc diffusion_coefficient::veccenter {l} {
     set m [vecmean $l]
@@ -81,23 +144,39 @@ proc diffusion_coefficient::veccenter {l} {
     return $r
 }
 
+
+# If loaded in gui, update message. Otherwise, print.
+proc diffusion_coefficient::status {msg} {
+    set status_text $msg
+    update
+    puts "$msg"
+}
+
+
 # Compute the average MSD. Takes data from the currently-loaded
 # molecule, returns MSD (an array of floats) indexed by lag time.
 # Drift removal: found in http://www.ncbi.nlm.nih.gov/pmc/articles/PMC1303338/
 proc diffusion_coefficient::compute_avg_msd {} {
-    variable selection
-    variable status
-    variable remove_drift
-    variable from;   variable to;   variable step
-    variable window_from; variable window_to; variable  window_every
-    variable alongx; variable alongy; variable alongz
+    variable arg
+
+    set selection $arg(selection)
+    set status $arg(status)
+    set remove_drift $arg(remove_drift)
+    set from $arg(from);   set to $arg(to);   set step $arg(step)
+    set window_from $arg(window_from); set window_to $arg(window_to); 
+    set window_every $arg(window_every)
+    set alongx $arg(alongx); set alongy $arg(alongy); set alongz $arg(alongz)
+    
     variable xt;   variable yt;   variable zt
 
-
-    set status "Initializing"; update
+    status "Initializing"
     set as [atomselect top $selection]
     set T [molinfo top get numframes]
     set N [$as num];		# TODO check N>0
+
+
+    if{$to=="last"}		{ set to [expr $N-1] }
+    if{$window_to=="last"}	{ set window_to [expr $N-1] }
 
     # make three monster arrays x/y/z arranged for easy indexing
     # lindex $xt 4   returns the vector of all X's at time 4
@@ -132,12 +211,11 @@ proc diffusion_coefficient::compute_avg_msd {} {
 	    }
 	set msdm($ws) [expr $msdavg/$ns]
 
-	set status [format "Computing: %2.0f%% done" [expr 100.*($ws-$from)/($to-$from)] ]
-	update
+	status [format "Computing: %2.0f%% done" [expr 100.*($ws-$from)/($to-$from)] ]
     }
 
     # return
-    set status "Ready";  update
+    status "Ready"
     $as delete
     return [array get msdm]
 }
