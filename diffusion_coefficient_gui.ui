@@ -1,5 +1,5 @@
 # GUIBUILDER FILE Build 146
-# Created: 2011-07-22 16:58:47 by GUI Builder Build 146
+# Created: 2012-12-14 15:59:34 by GUI Builder Build 146
 language tcl 8.4
 widget {Tk frame} f {
 	geometry min_column {40 40}
@@ -119,7 +119,8 @@ widget {Tk label} _label_1 {
 }
 widget {Tk label} _label_2 {
 	configure -font {helvetica 10}
-	configure -text {© 2011 Universitat Pompeu Fabra\nToni Giorgino - www.multiscalelab.org}
+	configure -text {Computes one, two or three-dimensional MSD-based diffusion
+coefficients of a chosen molecular species.}
 	geometry -column 1
 	geometry -columnspan 2
 	geometry -row 2
@@ -160,7 +161,7 @@ widget {Tk label} _label_3 {
 	data TYPE {Tk label}
 }
 widget {Tk entry} _entry_1 {
-	configure -textvariable diffusion_coefficient_gui::selection
+	configure -textvariable diffusion_coefficient::arg(selection)
 	configure -width 30
 	geometry -column 2
 	geometry -columnspan 1
@@ -203,7 +204,7 @@ widget {Tk label} _label_4 {
 }
 widget {Tk entry} _entry_2 {
 	configure -justify center
-	configure -textvariable diffusion_coefficient_gui::dt
+	configure -textvariable diffusion_coefficient::arg(dt)
 	configure -width 6
 	geometry -column 2
 	geometry -columnspan 1
@@ -247,7 +248,7 @@ widget {Tk label} _label_5 {
 widget {Tk checkbutton} _checkbutton_1 {
 	configure -font {helvetica 10}
 	configure -text x
-	configure -variable diffusion_coefficient_gui::alongx
+	configure -variable diffusion_coefficient::arg(alongx)
 	geometry -column 1
 	geometry -columnspan 1
 	geometry -row 1
@@ -269,7 +270,7 @@ widget {Tk checkbutton} _checkbutton_1 {
 widget {Tk checkbutton} _checkbutton_2 {
 	configure -font {helvetica 10}
 	configure -text y
-	configure -variable diffusion_coefficient_gui::alongy
+	configure -variable diffusion_coefficient::arg(alongy)
 	geometry -column 2
 	geometry -columnspan 1
 	geometry -row 1
@@ -292,7 +293,7 @@ widget {Tk checkbutton} _checkbutton_3 {
 	configure -font {helvetica 10}
 	configure -takefocus 1
 	configure -text z
-	configure -variable diffusion_coefficient_gui::alongz
+	configure -variable diffusion_coefficient::arg(alongz)
 	geometry -column 3
 	geometry -columnspan 1
 	geometry -row 1
@@ -438,7 +439,7 @@ widget {Tk label} _label_8 {
 }
 widget {Tk entry} _entry_4 {
 	configure -justify center
-	configure -textvariable diffusion_coefficient_gui::to
+	configure -textvariable diffusion_coefficient::arg(to)
 	configure -width 6
 	geometry -column 3
 	geometry -columnspan 1
@@ -460,7 +461,7 @@ widget {Tk entry} _entry_4 {
 }
 widget {Tk entry} _entry_5 {
 	configure -justify center
-	configure -textvariable diffusion_coefficient_gui::step
+	configure -textvariable diffusion_coefficient::arg(step)
 	configure -width 6
 	geometry -column 5
 	geometry -columnspan 1
@@ -566,7 +567,7 @@ widget {Tk label} _label_12 {
 }
 widget {Tk entry} _entry_6 {
 	configure -justify center
-	configure -textvariable diffusion_coefficient_gui::window_from
+	configure -textvariable diffusion_coefficient::arg(window_from)
 	configure -width 6
 	geometry -column 1
 	geometry -columnspan 1
@@ -631,7 +632,7 @@ widget {Tk label} _label_14 {
 }
 widget {Tk entry} _entry_7 {
 	configure -justify center
-	configure -textvariable diffusion_coefficient_gui::window_to
+	configure -textvariable diffusion_coefficient::arg(window_to)
 	configure -width 6
 	geometry -column 3
 	geometry -columnspan 1
@@ -674,7 +675,7 @@ widget {Tk label} _label_15 {
 }
 widget {Tk entry} _entry_8 {
 	configure -justify center
-	configure -textvariable diffusion_coefficient_gui::window_every
+	configure -textvariable diffusion_coefficient::arg(window_every)
 	configure -width 6
 	geometry -column 5
 	geometry -columnspan 1
@@ -697,12 +698,20 @@ widget {Tk entry} _entry_8 {
 widget {Tk checkbutton} _checkbutton_4 {
 	configure -font {helvetica 10}
 	configure -text {Remove COM drift}
-	configure -variable diffusion_coefficient_gui::remove_drift
+	configure -variable diffusion_coefficient::arg(remove_drift)
 	geometry -column 4
 	geometry -columnspan 1
 	geometry -row 1
 	geometry -rowspan 1
 	geometry -sticky ew
+	geometry min_column {2 40}
+	geometry min_row 2
+	geometry pad_column {0 0}
+	geometry pad_row 0
+	geometry resize_column {3 3}
+	geometry resize_row 0
+	geometry weight_column {1 1}
+	geometry weight_row 0
 	data GROUP Tk
 	data ID _checkbutton_4
 	data MASTER _frame_1
@@ -716,6 +725,14 @@ widget {Tk button} _button_1 {
 	geometry -row 1
 	geometry -rowspan 1
 	geometry -sticky {}
+	geometry min_column {2 40}
+	geometry min_row 2
+	geometry pad_column {0 0}
+	geometry pad_row 0
+	geometry resize_column {3 3}
+	geometry resize_row 0
+	geometry weight_column {1 1}
+	geometry weight_row 0
 	data GROUP Tk
 	data ID reset_lags_button
 	data MASTER _frame_3
@@ -729,6 +746,14 @@ widget {Tk button} _button_2 {
 	geometry -row 1
 	geometry -rowspan 1
 	geometry -sticky {}
+	geometry min_column {2 40}
+	geometry min_row 2
+	geometry pad_column {0 0}
+	geometry pad_row 0
+	geometry resize_column {3 3}
+	geometry resize_row 0
+	geometry weight_column {1 1}
+	geometry weight_row 0
 	data GROUP Tk
 	data ID reset_interval_button
 	data MASTER _frame_4
