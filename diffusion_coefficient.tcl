@@ -77,12 +77,39 @@ proc ::diffusion_coefficient::diffusion_coefficient {args} {
 	diffusion_coefficient_usage
 	return
     } 
+    set_default_interval
+    set_default_lags
     eval parse_args $args
     parray arg
 
 
     # Compute the bare histogram
 
+}
+
+
+# Default analysis interval is the whole trajectory, all frames
+proc ::diffusion_coefficient::set_default_interval {} {
+    variable arg
+    if [molinfo num] {
+	set nf [molinfo top get numframes]
+	set arg(window_from) 0
+	set arg(window_to) [expr $nf-1]
+	set arg(window_every) 1
+    }
+}
+
+
+# Default lags is from 1/10 to 1/2 of the whole trajectory, at steps
+# of 1/50
+proc ::diffusion_coefficient::set_default_lags {} {
+    variable arg
+    if [molinfo num] {
+	set nf [molinfo top get numframes]
+	set arg(from) [expr $nf/10]
+	set arg(to)   [expr $nf/2 ]
+	set arg(step) [expr $nf/50]
+    }
 }
 
 
