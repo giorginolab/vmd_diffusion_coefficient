@@ -12,12 +12,12 @@ namespace eval ::diffusion_coefficient:: {
 	alongy		1 
 	alongz		1
 	remove_drift	1
-	from		0
-	to		last
-	step		1
-	window_from	0
-	window_to	last
-	window_every	1
+	from		-
+	to		-
+	step		-
+	window_from	-
+	window_to	-
+	window_every	-
     }
     array set arg $arg_defaults
 
@@ -41,11 +41,14 @@ proc ::diffusion_coefficient::diffusion_coefficient_usage { } {
     puts "VMD Diffusion Coefficient tool. Computes one, two or three-dimensional"
     puts "MSD-based diffusion coefficients of a chosen molecular species. "
     puts " "
-    puts "Usage: diffusion_coefficient <args>"
+    puts "Usage: diffusion_coefficient <args> {msd|diffusion}"
     puts "Args (with defaults):"
     foreach k $arg_list {
-	puts "   -$k $arg($k)"
+	puts "   -$k \"$arg($k)\""
     }
+    puts " "
+    puts "msd: return mean-squared displacements at each lag time tau"
+    puts "diffusion: return msd/tau"
     puts " "
     puts "See documentation at http://multiscalelab.org/utilities/DiffusionCoefficientTool"
 }
@@ -73,12 +76,12 @@ proc ::diffusion_coefficient::diffusion_coefficient {args} {
     variable arg
     variable arg_defaults
     array set arg $arg_defaults
+    set_default_interval
+    set_default_lags
     if {[llength $args]==0} {
 	diffusion_coefficient_usage
 	return
     } 
-    set_default_interval
-    set_default_lags
     eval parse_args $args
     parray arg
 
