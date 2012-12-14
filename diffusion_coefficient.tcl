@@ -80,7 +80,6 @@ proc ::diffusion_coefficient::diffusion_coefficient {args} {
     eval parse_args $args
     parray arg
 
-    check_selection
 
     # Compute the bare histogram
 
@@ -102,6 +101,24 @@ proc diffusion_coefficient::check_selection {} {
 	error "Each selected atom should belong to a separate molecule" 
     }
     $as delete
+}
+
+
+# Return a zero-centered version of the input list
+proc diffusion_coefficient::veccenter {l} {
+    set m [vecmean $l]
+    set N [llength $l]
+    set mN [lrepeat $N $m]
+    set r [vecsub $l $mN]
+    return $r
+}
+
+
+# If loaded in gui, update message. Otherwise, print.
+proc diffusion_coefficient::status {msg} {
+    variable status_text $msg
+    update
+    puts "$msg"
 }
 
 
@@ -138,23 +155,6 @@ proc diffusion_coefficient::msd_between {t0 t1 } {
 
 
 
-# Return a zero-centered version of the input list
-proc diffusion_coefficient::veccenter {l} {
-    set m [vecmean $l]
-    set N [llength $l]
-    set mN [lrepeat $N $m]
-    set r [vecsub $l $mN]
-    return $r
-}
-
-
-# If loaded in gui, update message. Otherwise, print.
-proc diffusion_coefficient::status {msg} {
-    set status_text $msg
-    update
-    puts "$msg"
-}
-
 
 # Compute the average MSD. Takes data from the currently-loaded
 # molecule, returns MSD (an array of floats) indexed by lag time.
@@ -163,14 +163,20 @@ proc diffusion_coefficient::compute_avg_msd {} {
     variable arg
 
     set selection $arg(selection)
-    set status $arg(status)
     set remove_drift $arg(remove_drift)
-    set from $arg(from);   set to $arg(to);   set step $arg(step)
-    set window_from $arg(window_from); set window_to $arg(window_to); 
+
+    set from $arg(from)
+    set to $arg(to)
+    set step $arg(step)
+    set window_from $arg(window_from)
+    set window_to $arg(window_to)
     set window_every $arg(window_every)
+
     set alongx $arg(alongx); set alongy $arg(alongy); set alongz $arg(alongz)
     
     variable xt;   variable yt;   variable zt
+
+    check_selection
 
     status "Initializing"
     set as [atomselect top $selection]
@@ -178,8 +184,8 @@ proc diffusion_coefficient::compute_avg_msd {} {
     set N [$as num];		# TODO check N>0
 
 
-    if{$to=="last"}		{ set to [expr $N-1] }
-    if{$window_to=="last"}	{ set window_to [expr $N-1] }
+    if {$to=="last"}		{ set to [expr $N-1] }
+    if {$window_to=="last"}	{ set window_to [expr $N-1] }
 
     # make three monster arrays x/y/z arranged for easy indexing
     # lindex $xt 4   returns the vector of all X's at time 4
@@ -214,7 +220,8 @@ proc diffusion_coefficient::compute_avg_msd {} {
 	    }
 	set msdm($ws) [expr $msdavg/$ns]
 
-	status [format "Computing: %2.0f%% done" [expr 100.*($ws-$from)/($to-$from)] ]
+	status [format "Computing: %2.0f%% done" \
+		    [expr 100.*($ws-$from)/($to-$from)] ]
     }
 
     # return
