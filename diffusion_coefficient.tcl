@@ -108,7 +108,10 @@ proc diffusion_coefficient::check_selection {} {
 
 # Uses class-variables xt, yt, zt
 proc diffusion_coefficient::msd_between {t0 t1 } {
-    set alongx $arg(alongx); set alongy $arg(alongy); set alongz $arg(alongz)
+    variable arg
+    set alongx $arg(alongx) 
+    set alongy $arg(alongy)
+    set alongz $arg(alongz)
 
     variable xt;   variable yt;   variable zt
 

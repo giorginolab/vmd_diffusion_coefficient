@@ -1,15 +1,15 @@
 # GUIBUILDER FILE Build 146
-# Created: 2012-12-14 16:59:04 by GUI Builder Build 146
+# Created: 2012-12-14 17:06:37 by GUI Builder Build 146
 language tcl 8.4
 widget {Tk frame} f {
 	geometry min_column {40 40}
-	geometry min_row {16 48 8 2 2 2 2 40 2}
+	geometry min_row {16 48 8 2 2 2 3 40 2}
 	geometry pad_column {0 0}
 	geometry pad_row {0 0 0 0 0 0 0 0 0}
 	geometry resize_column {0 3}
-	geometry resize_row {0 0 0 0 0 0 0 0 0}
+	geometry resize_row {0 3 0 0 0 0 0 3 0}
 	geometry weight_column {0 1}
-	geometry weight_row {0 0 0 0 0 0 0 0 0}
+	geometry weight_row {0 1 0 0 0 0 0 1 0}
 	data GROUP Tk
 	data ID {}
 	data MASTER {}
@@ -19,7 +19,7 @@ widget {Tk frame} f {
 widget {Tk frame} _frame_1 {
 	geometry -column 2
 	geometry -columnspan 1
-	geometry -row 5
+	geometry -row 4
 	geometry -rowspan 1
 	geometry -sticky ew
 	geometry min_column {40 40 40 40}
@@ -59,7 +59,7 @@ widget {Tk frame} _frame_2 {
 widget {Tk frame} _frame_3 {
 	geometry -column 2
 	geometry -columnspan 1
-	geometry -row 6
+	geometry -row 5
 	geometry -rowspan 1
 	geometry -sticky news
 	geometry min_column {40 40 40 40 40 40 40}
@@ -79,7 +79,7 @@ widget {Tk frame} _frame_3 {
 widget {Tk frame} _frame_4 {
 	geometry -column 2
 	geometry -columnspan 1
-	geometry -row 7
+	geometry -row 6
 	geometry -rowspan 1
 	geometry -sticky news
 	geometry min_column {40 40 40 40 40 40 40}
@@ -92,6 +92,26 @@ widget {Tk frame} _frame_4 {
 	geometry weight_row 0
 	data GROUP Tk
 	data ID _frame_4
+	data MASTER {}
+	data TYPE {Tk frame}
+	data level 1
+}
+widget {Tk frame} _frame_6 {
+	geometry -column 1
+	geometry -columnspan 1
+	geometry -row 9
+	geometry -rowspan 1
+	geometry -sticky news
+	geometry min_column {40 40}
+	geometry min_row 18
+	geometry pad_column {0 0}
+	geometry pad_row 0
+	geometry resize_column {0 3}
+	geometry resize_row 0
+	geometry weight_column {0 1}
+	geometry weight_row 0
+	data GROUP Tk
+	data ID _frame_6
 	data MASTER {}
 	data TYPE {Tk frame}
 	data level 1
@@ -186,7 +206,7 @@ widget {Tk label} _label_4 {
 	configure -text {Real time between frames (ps)}
 	geometry -column 1
 	geometry -columnspan 1
-	geometry -row 4
+	geometry -row 7
 	geometry -rowspan 1
 	geometry -sticky e
 	geometry min_column {2 40}
@@ -205,10 +225,10 @@ widget {Tk label} _label_4 {
 widget {Tk entry} _entry_2 {
 	configure -justify center
 	configure -textvariable diffusion_coefficient::arg(dt)
-	configure -width 6
+	configure -width 12
 	geometry -column 2
 	geometry -columnspan 1
-	geometry -row 4
+	geometry -row 7
 	geometry -rowspan 1
 	geometry -sticky w
 	geometry min_column {2 40}
@@ -229,7 +249,7 @@ widget {Tk label} _label_5 {
 	configure -text {Diffusion along}
 	geometry -column 1
 	geometry -columnspan 1
-	geometry -row 5
+	geometry -row 4
 	geometry -rowspan 1
 	geometry -sticky e
 	geometry min_column {2 40}
@@ -312,27 +332,6 @@ widget {Tk checkbutton} _checkbutton_3 {
 	data MASTER _frame_1
 	data TYPE {Tk checkbutton}
 }
-widget {Tk label} _label_7 {
-	configure -font {helvetica 10}
-	configure -text {Generate plot for}
-	geometry -column 1
-	geometry -columnspan 1
-	geometry -row 9
-	geometry -rowspan 1
-	geometry -sticky e
-	geometry min_column {2 40}
-	geometry min_row 2
-	geometry pad_column {0 0}
-	geometry pad_row 0
-	geometry resize_column {3 3}
-	geometry resize_row 0
-	geometry weight_column {1 1}
-	geometry weight_row 0
-	data GROUP Tk
-	data ID _label_7
-	data MASTER {}
-	data TYPE {Tk label}
-}
 widget {Tk button} _button_3 {
 	configure -text {MSD displacement}
 	geometry -column 1
@@ -378,7 +377,7 @@ widget {Tk label} _label_6 {
 	configure -text {Compute MSD at lag times from}
 	geometry -column 1
 	geometry -columnspan 1
-	geometry -row 6
+	geometry -row 5
 	geometry -rowspan 1
 	geometry -sticky e
 	geometry min_column {2 40}
@@ -528,7 +527,7 @@ widget {Tk label} _label_11 {
 	configure -text {Analysis interval from}
 	geometry -column 1
 	geometry -columnspan 1
-	geometry -row 7
+	geometry -row 6
 	geometry -rowspan 1
 	geometry -sticky e
 	geometry min_column {2 40}
@@ -758,5 +757,39 @@ widget {Tk button} _button_2 {
 	data ID reset_interval_button
 	data MASTER _frame_4
 	data TYPE {Tk button}
+}
+widget {Tk label} _label_7 {
+	configure -font {helvetica 10}
+	configure -text {Generate plot for}
+	geometry -column 2
+	geometry -columnspan 1
+	geometry -row 1
+	geometry -rowspan 1
+	geometry -sticky e
+	geometry min_column {2 40}
+	geometry min_row 2
+	geometry pad_column {0 0}
+	geometry pad_row 0
+	geometry resize_column {3 3}
+	geometry resize_row 0
+	geometry weight_column {1 1}
+	geometry weight_row 0
+	data GROUP Tk
+	data ID _label_7
+	data MASTER _frame_6
+	data TYPE {Tk label}
+}
+widget {BWidget Button} _Button_1 {
+	configure -font {helvetica 9 bold}
+	configure -text ?
+	geometry -column 1
+	geometry -columnspan 1
+	geometry -row 1
+	geometry -rowspan 1
+	geometry -sticky nsew
+	data GROUP BWidget
+	data ID button_help
+	data MASTER _frame_6
+	data TYPE {BWidget Button}
 }
 
