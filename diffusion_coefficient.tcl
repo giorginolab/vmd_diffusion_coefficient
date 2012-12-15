@@ -1,9 +1,14 @@
 
+# Core functions to compute mean square displacements
 
 package provide diffusion_coefficient 1.0
 
 namespace eval ::diffusion_coefficient:: {
-    # Variables matching command line options
+    # Variables matching command line options. Note to self: putting
+    # them in an array was not a good idea. It makes sense when there
+    # is a 1-to-1 correspondence between CLI arguments and GUI
+    # elements, but provides no advantage in this case, when the GUI
+    # provides additional/different functionality.
     variable arg
     variable arg_defaults {
 	selection "water and name OH"
@@ -48,9 +53,9 @@ proc ::diffusion_coefficient::diffusion_coefficient_usage { } {
     }
     puts " "
     puts "msd: return mean-squared displacements at each lag time tau"
-    puts "diffusion: return msd/tau"
+    puts "diffusion: return MSD(tau)/(2*D*tau)"
     puts " "
-    puts "See documentation at http://multiscalelab.org/utilities/DiffusionCoefficientTool"
+    puts "See http://multiscalelab.org/utilities/DiffusionCoefficientTool"
 }
 
 
@@ -121,7 +126,6 @@ proc ::diffusion_coefficient::set_default_lags {} {
 proc diffusion_coefficient::check_selection {} {
     variable arg
     set as [atomselect top $arg(selection)]
-    set r 0
     if {[$as num]==0} {
 	$as delete
 	error "Atom selection is empty" 
@@ -131,6 +135,9 @@ proc diffusion_coefficient::check_selection {} {
 	error "Each selected atom should belong to a separate molecule" 
     }
     $as delete
+    if {[molinfo top get numframes]<=2} {
+	error "Not enough trajectory frames"
+    }
 }
 
 
@@ -248,7 +255,7 @@ proc diffusion_coefficient::compute_avg_msd {} {
 		set msdavg [expr $msdavg+$msd]
 		incr ns
 	    }
-	set msdm($ws) [expr $msdavg/$ns]
+	set msdm($ws) [expr 1.*$msdavg/$ns]
 
 	status [format "Computing: %2.0f%% done" \
 		    [expr 100.*($ws-$from)/($to-$from)] ]

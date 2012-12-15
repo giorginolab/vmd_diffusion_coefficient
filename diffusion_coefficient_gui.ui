@@ -1,5 +1,5 @@
 # GUIBUILDER FILE Build 146
-# Created: 2012-12-15 19:42:47 by GUI Builder Build 146
+# Created: 2012-12-15 21:42:51 by GUI Builder Build 146
 language tcl 8.4
 widget {Tk frame} f {
 	geometry min_column {40 40}
@@ -140,8 +140,8 @@ widget {Tk label} _label_1 {
 }
 widget {Tk label} _label_2 {
 	configure -font {helvetica 10}
-	configure -text {Computes one, two or three-dimensional MSD-based diffusion
-coefficients of a chosen molecular species}
+	configure -text {Compute one, two or three-dimensional mean squared displacements (MSD) of a molecular specie, and associated diffusion coefficients}
+	configure -wraplength 450
 	geometry -column 1
 	geometry -columnspan 2
 	geometry -row 2
