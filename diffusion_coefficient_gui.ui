@@ -1,13 +1,13 @@
 # GUIBUILDER FILE Build 146
-# Created: 2012-12-14 17:40:13 by GUI Builder Build 146
+# Created: 2012-12-15 19:13:23 by GUI Builder Build 146
 language tcl 8.4
 widget {Tk frame} f {
 	geometry min_column {40 40}
-	geometry min_row {16 48 8 2 2 2 3 40 2}
+	geometry min_row {16 24 42 12 4 2 21 40 40}
 	geometry pad_column {0 0}
 	geometry pad_row {0 0 0 0 0 0 0 0 0}
 	geometry resize_column {0 3}
-	geometry resize_row {0 3 0 0 0 0 0 3 0}
+	geometry resize_row {1 3 0 0 0 0 0 3 0}
 	geometry weight_column {0 1}
 	geometry weight_row {0 1 0 0 0 0 0 1 0}
 	data GROUP Tk
@@ -41,7 +41,7 @@ widget {Tk frame} _frame_2 {
 	geometry -columnspan 1
 	geometry -row 9
 	geometry -rowspan 1
-	geometry -sticky news
+	geometry -sticky ew
 	geometry min_column {2 40}
 	geometry min_row 2
 	geometry pad_column {0 0}
@@ -63,7 +63,7 @@ widget {Tk frame} _frame_3 {
 	geometry -rowspan 1
 	geometry -sticky news
 	geometry min_column {40 40 40 40 40 40 40}
-	geometry min_row 22
+	geometry min_row 3
 	geometry pad_column {0 0 0 0 0 0 0}
 	geometry pad_row 0
 	geometry resize_column {0 0 0 0 0 3 0}
@@ -83,7 +83,7 @@ widget {Tk frame} _frame_4 {
 	geometry -rowspan 1
 	geometry -sticky news
 	geometry min_column {40 40 40 40 40 40 40}
-	geometry min_row 3
+	geometry min_row 2
 	geometry pad_column {0 0 0 0 0 0 0}
 	geometry pad_row 0
 	geometry resize_column {0 0 0 0 0 3 0}
@@ -101,7 +101,7 @@ widget {Tk frame} _frame_6 {
 	geometry -columnspan 1
 	geometry -row 9
 	geometry -rowspan 1
-	geometry -sticky news
+	geometry -sticky ew
 	geometry min_column {40 40}
 	geometry min_row 7
 	geometry pad_column {0 0}
@@ -118,6 +118,7 @@ widget {Tk frame} _frame_6 {
 }
 widget {Tk label} _label_1 {
 	configure -font {helvetica 10 bold}
+	configure -pady 6
 	configure -text {VMD Diffusion Coefficient Tool}
 	geometry -column 1
 	geometry -columnspan 2
@@ -161,7 +162,6 @@ coefficients of a chosen molecular species}
 }
 widget {Tk label} _label_3 {
 	configure -font {helvetica 10}
-	configure -height 2
 	configure -text {Selection (one atom per molecule)}
 	geometry -column 1
 	geometry -columnspan 1
@@ -182,6 +182,7 @@ widget {Tk label} _label_3 {
 	data TYPE {Tk label}
 }
 widget {Tk entry} _entry_1 {
+	configure -justify center
 	configure -textvariable diffusion_coefficient::arg(selection)
 	configure -width 30
 	geometry -column 2
@@ -204,7 +205,6 @@ widget {Tk entry} _entry_1 {
 }
 widget {Tk label} _label_4 {
 	configure -font {helvetica 10}
-	configure -height 2
 	configure -text {Real time between frames (ps)}
 	geometry -column 1
 	geometry -columnspan 1
@@ -248,7 +248,6 @@ widget {Tk entry} _entry_2 {
 }
 widget {Tk label} _label_5 {
 	configure -font {helvetica 10}
-	configure -height 2
 	configure -text {Diffusion along}
 	geometry -column 1
 	geometry -columnspan 1
@@ -379,7 +378,6 @@ widget {Tk button} _button_4 {
 }
 widget {Tk label} _label_6 {
 	configure -font {helvetica 10}
-	configure -height 2
 	configure -text {Compute MSD at lag times \u03C4 from}
 	geometry -column 1
 	geometry -columnspan 1
@@ -530,7 +528,6 @@ widget {Tk label} _label_10 {
 }
 widget {Tk label} _label_11 {
 	configure -font {helvetica 10}
-	configure -height 2
 	configure -text {Analysis interval from}
 	geometry -column 1
 	geometry -columnspan 1
@@ -709,7 +706,7 @@ widget {Tk checkbutton} _checkbutton_4 {
 	geometry -columnspan 1
 	geometry -row 1
 	geometry -rowspan 1
-	geometry -sticky ew
+	geometry -sticky {}
 	geometry min_column {2 40}
 	geometry min_row 2
 	geometry pad_column {0 0}
@@ -767,7 +764,6 @@ widget {Tk button} _button_2 {
 }
 widget {Tk label} _label_7 {
 	configure -font {helvetica 10}
-	configure -height 2
 	configure -text {Generate plot for}
 	geometry -column 2
 	geometry -columnspan 1
@@ -788,13 +784,15 @@ widget {Tk label} _label_7 {
 	data TYPE {Tk label}
 }
 widget {Tk button} _button_5 {
+	configure -bitmap questhead
+	configure -borderwidth 1
 	configure -font {helvetica 10 bold}
 	configure -text ?
 	geometry -column 1
 	geometry -columnspan 1
 	geometry -row 1
 	geometry -rowspan 1
-	geometry -sticky {}
+	geometry -sticky nsew
 	geometry min_column {2 40}
 	geometry min_row 2
 	geometry pad_column {0 0}
@@ -807,5 +805,24 @@ widget {Tk button} _button_5 {
 	data ID button_help
 	data MASTER _frame_6
 	data TYPE {Tk button}
+}
+menu {Menu menu} MENU {
+	data MASTER {}
+	data level 0
+}
+menu {Menu cascade} menuitem1 {
+	configure -label Help
+	data MASTER MENU
+}
+menu {Menu command} menuitem2 {
+	configure -command help_docs
+	configure -compound right
+	configure -label Documentation...
+	data MASTER menuitem1
+}
+menu {Menu command} menuitem3 {
+	configure -command help_about
+	configure -label About
+	data MASTER menuitem1
 }
 
