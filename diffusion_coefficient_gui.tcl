@@ -32,7 +32,7 @@ package provide diffusion_coefficient_gui 1.0
 set diffusion_coefficient_gui::in_vmd \
     [string length [info proc vmd_install_extension]]
 if { $diffusion_coefficient_gui::in_vmd } {
-    vmd_install_extension diffusion_coefficient \
+    vmd_install_extension diffusion_coefficient_gui \
 	diffusion_coefficient_gui::diffusion_coefficient_tk \
 	"Analysis/Diffusion Coefficient Tool"
 } else {
@@ -54,6 +54,7 @@ proc diffusion_coefficient_gui::diffusion_coefficient_tk {} {
     }
     reset_interval_button_command
     reset_lags_button_command
+#    pack $diffusion_coefficient_window.menu.menuitem1 -side right
     return $diffusion_coefficient_window
 }
 # END USER CODE
