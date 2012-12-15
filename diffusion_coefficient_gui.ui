@@ -1,5 +1,5 @@
 # GUIBUILDER FILE Build 146
-# Created: 2012-12-15 19:13:23 by GUI Builder Build 146
+# Created: 2012-12-15 19:42:47 by GUI Builder Build 146
 language tcl 8.4
 widget {Tk frame} f {
 	geometry min_column {40 40}
@@ -815,13 +815,13 @@ menu {Menu cascade} menuitem1 {
 	data MASTER MENU
 }
 menu {Menu command} menuitem2 {
-	configure -command help_docs
+	configure -command diffusion_coefficient_gui::help_docs
 	configure -compound right
 	configure -label Documentation...
 	data MASTER menuitem1
 }
 menu {Menu command} menuitem3 {
-	configure -command help_about
+	configure -command diffusion_coefficient_gui::help_about
 	configure -label About
 	data MASTER menuitem1
 }
