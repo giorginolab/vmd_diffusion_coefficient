@@ -152,11 +152,32 @@ proc diffusion_coefficient::veccenter {l} {
 
 
 # If loaded in gui, update message. Otherwise, print.
-proc diffusion_coefficient::status {msg} {
+proc diffusion_coefficient::set_status {msg} {
     variable status_text $msg
     update
     puts "$msg"
 }
+
+
+
+
+# Gets tau, MSD(tau) and returns MSD(tau)/2/D/tau
+proc diffusion_coefficient::msd_to_d {tau_list msd_list} {
+    variable arg
+
+    # Number of dimensions
+    set alongx $arg(alongx)
+    set alongy $arg(alongy)
+    set alongz $arg(alongz)
+    set ND [expr $alongx+$alongy+$alongz]
+
+    set dt $arg(dt)
+    foreach tau $tau_list msd $msd_list {
+	lappend d_list [expr $msd/2.0/$tau/$ND]
+    }
+    return $d_list
+}
+
 
 
 
@@ -194,13 +215,11 @@ proc diffusion_coefficient::msd_between {t0 t1 } {
 
 
 # Compute the average MSD. Takes data from the currently-loaded
-# molecule, returns MSD (an array of floats) indexed by lag time.
-# Drift removal: found in http://www.ncbi.nlm.nih.gov/pmc/articles/PMC1303338/
+# molecule, returns two lists with lag times and MSD (floats).
+# Drift removal: see
+# http://www.ncbi.nlm.nih.gov/pmc/articles/PMC1303338/
 proc diffusion_coefficient::compute_avg_msd {} {
     variable arg
-
-    set selection $arg(selection)
-    set remove_drift $arg(remove_drift)
 
     set from $arg(from)
     set to $arg(to)
@@ -215,10 +234,10 @@ proc diffusion_coefficient::compute_avg_msd {} {
 
     check_selection
 
-    status "Initializing"
-    set as [atomselect top $selection]
+    set_status "Initializing"
+    set as [atomselect top $arg(selection)]
     set T [molinfo top get numframes]
-    set N [$as num];		# TODO check N>0
+    set N [$as num]
 
 
     if {$to=="last"}		{ set to [expr $N-1] }
@@ -232,7 +251,7 @@ proc diffusion_coefficient::compute_avg_msd {} {
 	set xvec [$as get x]
 	set yvec [$as get y]
 	set zvec [$as get z]
-	if {$remove_drift==1} {
+	if {$arg(remove_drift)==1} {
 	    set xvec [veccenter $xvec]
 	    set yvec [veccenter $yvec]
 	    set zvec [veccenter $zvec]
@@ -241,8 +260,11 @@ proc diffusion_coefficient::compute_avg_msd {} {
 	lappend yt $yvec
 	lappend zt $zvec
     }
+    $as delete
 
-    # Form windows of varying sizes
+    # Form windows of varying sizes; ws=tau
+    set tau_list {}
+    set msd_list {}
     for {set ws $from} {$ws<=$to} {incr ws $step} {
 	set msdavg 0
 	set ns 0
@@ -255,14 +277,17 @@ proc diffusion_coefficient::compute_avg_msd {} {
 		set msdavg [expr $msdavg+$msd]
 		incr ns
 	    }
-	set msdm($ws) [expr 1.*$msdavg/$ns]
 
-	status [format "Computing: %2.0f%% done" \
+	# convert frames into ns
+	set tau [expr $ws*$arg(dt)/1000.]
+	lappend tau_list $tau
+	lappend msd_list [expr 1.*$msdavg/$ns]
+
+	set_status [format "Computing: %2.0f%% done" \
 		    [expr 100.*($ws-$from)/($to-$from)] ]
     }
 
     # return
-    status "Ready"
-    $as delete
-    return [array get msdm]
+    set_status "Ready"
+    return [list $tau_list $msd_list]
 }

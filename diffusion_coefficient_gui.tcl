@@ -13,7 +13,8 @@ package require Tk 8.4
 
 # Declare the namespace for this dialog
 namespace eval diffusion_coefficient_gui {
-    variable tau_u8 "\u03C4"
+    variable utf8_tau "\u03C4"
+    variable utf8_A2 "\uc5\ub2"
 }
 
 # Source the ui file, which must exist
@@ -363,29 +364,17 @@ proc diffusion_coefficient_gui::button_help_command args {
 #
 proc diffusion_coefficient_gui::plot_d_button_command args {
     variable ::diffusion_coefficient::arg
-    variable tau_u8
+    variable utf8_tau
+    variable utf8_A2
 
-    set dt $arg(dt)
+    lassign [::diffusion_coefficient::compute_avg_msd] tlist msdlist
+    set dlist [::diffusion_coefficient::msd_to_d $tlist $msdlist]
 
-    # Number of dimensions
-    set alongx $arg(alongx)
-    set alongy $arg(alongy)
-    set alongz $arg(alongz)
-    set ND [expr $alongx+$alongy+$alongz]
-
-    array set msdm [diffusion_coefficient::compute_avg_msd]
-
-    set tlist {}; set dlist {}; 
-    foreach i [lsort -integer [array names msdm]] {
-	lappend tlist [expr $i*$dt/1000.]
-	lappend dlist [expr $msdm($i)/($i*$dt/1000.)/(2*$ND)]
-    }
-
-    set title [format "%d-dimensional diffusion coefficient D = MSD/(2*$ND*$tau_u8)" $ND]
+    set title [format "%d-dimensional diffusion coefficient, D = MSD/(2*$ND*$utf8_tau)" $ND]
     multiplot -x $tlist -y $dlist -plot \
 	-title $title \
-	-xlabel "Lag time $tau_u8 (ns)" \
-	-ylabel "D (\uc5\ub2/ns)" \
+	-xlabel "Lag time $utf8_tau (ns)" \
+	-ylabel "D ($utf8_A2/ns)" \
 	-marker point -radius 2 -fillcolor "#ff0000" -color "#ff0000" 
 
 
@@ -399,21 +388,15 @@ proc diffusion_coefficient_gui::plot_d_button_command args {
 #    <NONE>
 #
 proc diffusion_coefficient_gui::plot_msd_button_command args {
-    variable ::diffusion_coefficient::arg
-    variable tau_u8
+    variable utf8_tau
+    variable utf8_A2
 
-    set dt $arg(dt)
-
-    array set msdm [diffusion_coefficient::compute_avg_msd]
-    foreach i [lsort -integer [array names msdm]] {
-	lappend tlist [expr $i*$dt/1000.]
-	lappend dlist $msdm($i)
-    }
+    lassign [::diffusion_coefficient::compute_avg_msd] tlist dlist
 
     multiplot -x $tlist -y $dlist -plot \
 	-title "Mean square displacement" \
-	-xlabel "Lag time $tau_u8 (ns)" \
-	-ylabel "MSD (\uc5\ub2)" \
+	-xlabel "Lag time $utf8_tau (ns)" \
+	-ylabel "MSD ($utf8_A2)" \
 	-marker point -radius 2 -fillcolor "#ff0000" -color "#ff0000"
 
 }
