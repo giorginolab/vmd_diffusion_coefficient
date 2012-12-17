@@ -1,5 +1,11 @@
 
-# Core functions to compute mean square displacements
+# Core functions for VMD Diffusion Coefficient Plugin. VMD Diffusion
+# Coefficient tool. Computes one, two or three-dimensional MSD-based
+# diffusion coefficients of a chosen molecular species. See the
+# LICENSE file for copyright information.
+
+# Toni Giorgino, ISIB-Consiglio Nazionale delle Ricerche
+# http://multiscalelab.org/utilities/DiffusionCoefficientTool 
 
 package provide diffusion_coefficient 1.0
 
