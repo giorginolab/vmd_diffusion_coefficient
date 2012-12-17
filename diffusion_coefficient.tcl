@@ -23,8 +23,8 @@ namespace eval ::diffusion_coefficient:: {
 	interval_from	-
 	interval_to	-
 	interval_stride	-
-	command         -
-	command_arg     -
+	d               -
+	msd             -
     }
     array set arg $arg_defaults
 
@@ -51,13 +51,13 @@ MSD-based diffusion coefficients of a chosen molecular species.
 Usage: diffusion_coefficient <options> <command>
 
 Command is one of:
-msd <NN>      Compute mean squared displacement (MSD) at a tau of
+-msd <NN>     Compute mean squared displacement (MSD) at a tau of
               NN frames; equivalent to msd_interval -from NN -to NN.
               Returns a value as Angstrom^2 . This is the recommended 
               way of using the plugin.
-msd_range     Compute MSD for tau between -from and -to (mandatory)
+-msd range    Compute MSD for taus between -from and -to (mandatory)
               Returns two lists of {tau} {MSD(tau)}
-d_range       Compute D(tau)=MSD(tau)/(2*D*tau) between -from and
+-d range      Compute D(tau)=MSD(tau)/(2*D*tau) between -from and
               -to (mandatory). Returns two lists of {tau} {D(tau)}
 
 See http://multiscalelab.org/utilities/DiffusionCoefficientTool for
@@ -90,13 +90,6 @@ proc ::diffusion_coefficient::parse_args {args} {
 		set v [lindex $args $i]
 		set arg($a) $v
 	    }
-	} elseif {$a == "msd"} {
-	    incr i
-	    set v [lindex $args $i]
-	    set arg(command) $a
-	    set arg(command_arg) $v
-	} elseif {$a == "msd_range"  || $a == "d_range" } {
-	    set arg(command) $a
 	} else {
 	    error "Unknown command: $a"
 	}
@@ -116,31 +109,31 @@ proc ::diffusion_coefficient::diffusion_coefficient {args} {
 	return
     } 
     eval parse_args $args
+    parray arg
 
-    # Handle commands
-    switch $arg(command) {
-	msd {
-	    set tau $arg(command_arg)
-	    set arg(from) $tau
-	    set arg(to)   $tau
-	    set arg(step) $tau
-	    set arg(command) msd_range
-	    lassign [compute_avg_msd] tlist msdlist
-	    return [lindex $msdlist 0]
-	}
-	msd_range {
-	    return [compute_avg_msd] 
-	}
-	d_range {
+
+    if { ($arg(msd)=="-" && $arg(d)=="-") ||
+         ($arg(msd)!="-" && $arg(d)!="-") } {
+	error "Exactly one of -msd or -d must be given"
+    }
+
+    # Execute
+    if { $arg(msd)=="range" } {
+	return [compute_avg_msd]; # MSD range
+    } elseif [string is integer $arg(msd)] {
+	set tau $arg(msd); # MSD integer
+	set arg(from) $tau
+	set arg(to)   $tau
+	set arg(step) 1
+	lassign [compute_avg_msd] tlist msdlist
+	return [lindex $msdlist 0]
+    } elseif { $arg(d)=="range" } { # D range
 	    lassign [compute_avg_msd] tlist msdlist
 	    set dlist [msd_to_d $tlist $msdlist]
 	    return [list $tlist $dlist]
-	}
-	default {
-	    error "Unknown command."
-	}
+    } else {
+	error "Unknown invokation type."
     }
-
 
 }
 
