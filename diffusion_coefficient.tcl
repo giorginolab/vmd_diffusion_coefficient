@@ -208,6 +208,16 @@ proc diffusion_coefficient::set_status {msg} {
 }
 
 
+# Number of dimensions
+proc diffusion_coefficient::nd {} {
+    variable arg
+    set alongx $arg(alongx)
+    set alongy $arg(alongy)
+    set alongz $arg(alongz)
+    set ND [expr $alongx+$alongy+$alongz]
+    return $ND
+}
+
 
 
 
@@ -329,15 +339,9 @@ proc diffusion_coefficient::compute_avg_msd {} {
 proc diffusion_coefficient::msd_to_d {tau_list msd_list} {
     variable arg
 
-    # Number of dimensions
-    set alongx $arg(alongx)
-    set alongy $arg(alongy)
-    set alongz $arg(alongz)
-    set ND [expr $alongx+$alongy+$alongz]
-
     set dt $arg(dt)
     foreach tau $tau_list msd $msd_list {
-	lappend d_list [expr $msd/2.0/$tau/$ND]
+	lappend d_list [expr $msd/2.0/$tau/[nd]]
     }
     return $d_list
 }

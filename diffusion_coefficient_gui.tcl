@@ -27,6 +27,11 @@ source [file join $diffusion_coefficient_gui::SCRIPTDIR diffusion_coefficient_gu
 # This code is a mess because it can be loaded back in guibuilder.
 package provide diffusion_coefficient_gui 1.0
 
+namespace eval diffusion_coefficient_gui {
+    variable utf8_tau "\u03C4"
+    variable utf8_A2 "\uc5\ub2"
+}
+
 # VMD-specific stuff
 set diffusion_coefficient_gui::in_vmd \
     [string length [info proc vmd_install_extension]]
@@ -364,6 +369,7 @@ proc diffusion_coefficient_gui::plot_d_button_command args {
     variable utf8_tau
     variable utf8_A2
 
+    set ND [::diffusion_coefficient::nd]
     lassign [::diffusion_coefficient::compute_avg_msd] tlist msdlist
     set dlist [::diffusion_coefficient::msd_to_d $tlist $msdlist]
 
