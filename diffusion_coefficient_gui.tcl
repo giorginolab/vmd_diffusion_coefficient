@@ -366,21 +366,24 @@ proc diffusion_coefficient_gui::button_help_command args {
 #
 proc diffusion_coefficient_gui::plot_d_button_command args {
     variable ::diffusion_coefficient::arg
+    variable diffusion_coefficient_window
     variable utf8_tau
     variable utf8_A2
 
-    set ND [::diffusion_coefficient::nd]
-    lassign [::diffusion_coefficient::compute_avg_msd] tlist msdlist
-    set dlist [::diffusion_coefficient::msd_to_d $tlist $msdlist]
-
-    set title [format "%d-dimensional diffusion coefficient, D = MSD/(2*$ND*$utf8_tau)" $ND]
-    multiplot -x $tlist -y $dlist -plot \
-	-title $title \
-	-xlabel "Lag time $utf8_tau (ns)" \
-	-ylabel "D ($utf8_A2/ns)" \
-	-marker point -radius 2 -fillcolor "#ff0000" -color "#ff0000" 
-
-
+    if [ catch {
+	set ND [::diffusion_coefficient::nd]
+	lassign [::diffusion_coefficient::compute_avg_msd] tlist msdlist
+	set dlist [::diffusion_coefficient::msd_to_d $tlist $msdlist]
+	set title [format "%d-dimensional diffusion coefficient, D = MSD/(2*$ND*$utf8_tau)" $ND]
+	multiplot -x $tlist -y $dlist -plot \
+	    -title $title \
+	    -xlabel "Lag time $utf8_tau (ns)" \
+	    -ylabel "D ($utf8_A2/ns)" \
+	    -marker point -radius 2 -fillcolor "#ff0000" -color "#ff0000" 
+    } e ] {
+	tk_messageBox -title Error -message $e -icon error \
+	    -parent $diffusion_coefficient_window 
+    }
 }
 
 # diffusion_coefficient_gui::plot_msd_button_command --
@@ -391,16 +394,22 @@ proc diffusion_coefficient_gui::plot_d_button_command args {
 #    <NONE>
 #
 proc diffusion_coefficient_gui::plot_msd_button_command args {
+    variable diffusion_coefficient_window
     variable utf8_tau
     variable utf8_A2
 
-    lassign [::diffusion_coefficient::compute_avg_msd] tlist dlist
+    if [ catch {
+	lassign [::diffusion_coefficient::compute_avg_msd] tlist msdlist
 
-    multiplot -x $tlist -y $dlist -plot \
-	-title "Mean square displacement" \
-	-xlabel "Lag time $utf8_tau (ns)" \
-	-ylabel "MSD ($utf8_A2)" \
-	-marker point -radius 2 -fillcolor "#ff0000" -color "#ff0000"
+	multiplot -x $tlist -y $msdlist -plot \
+	    -title "Mean square displacement" \
+	    -xlabel "Lag time $utf8_tau (ns)" \
+	    -ylabel "MSD ($utf8_A2)" \
+	    -marker point -radius 2 -fillcolor "#ff0000" -color "#ff0000"
+    } e ] {
+	tk_messageBox -title Error -message $e -icon error \
+	    -parent $diffusion_coefficient_window 
+    }
 
 }
 
