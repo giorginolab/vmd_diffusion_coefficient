@@ -1,10 +1,5 @@
-Important: please check the current version of software and 
-documentation at its home-page:
-
-http://www.multiscalelab.org/utilities/DiffusionCoefficientTool
-
-
-Diffusion Coefficient Tool (alpha)
+VMD Diffusion Coefficient Tool
+----------------------------------------
 
 Toni Giorgino — © ISIB-CNR 2012, Universitat Pompeu Fabra 2011
 
@@ -23,3 +18,10 @@ often than not, this DOES NOT occur in practice, for a variety of
 reasons, including poor sampling or non-diffusive behavior. It is YOUR
 responsibility to understand why and, if you trust the linearity, to
 fit the slope.
+
+
+Important: please check the current version of software and 
+documentation at its home-page:
+
+http://www.multiscalelab.org/utilities/DiffusionCoefficientTool
+

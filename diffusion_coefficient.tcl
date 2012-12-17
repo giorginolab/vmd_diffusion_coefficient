@@ -4,7 +4,7 @@
 # diffusion coefficients of a chosen molecular species. See the
 # LICENSE file for copyright information.
 
-# Toni Giorgino, ISIB-Consiglio Nazionale delle Ricerche
+# Toni Giorgino, ISIB-Consiglio Nazionale delle Ricerche, 2012
 # http://multiscalelab.org/utilities/DiffusionCoefficientTool 
 
 package provide diffusion_coefficient 1.0
