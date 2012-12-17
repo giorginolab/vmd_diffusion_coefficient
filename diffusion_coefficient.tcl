@@ -20,15 +20,17 @@ namespace eval ::diffusion_coefficient:: {
 	from		-
 	to		-
 	step		-
-	window_from	-
-	window_to	-
-	window_every	-
+	interval_from	-
+	interval_to	-
+	interval_stride	-
+	command         -
+	command_arg     -
     }
     array set arg $arg_defaults
 
     # List of args in "preferred" order
     variable arg_list {selection dt alongx alongy alongz remove_drift 
-	from to step  window_from window_to window_every  }
+	from to step  interval_from interval_to interval_stride  }
 
     # Status text, bound by the GUI, otherwise unused
     variable status_text
@@ -43,35 +45,61 @@ proc diffusion_coefficient { args } { return [eval ::diffusion_coefficient::diff
 proc ::diffusion_coefficient::diffusion_coefficient_usage { } {
     variable arg
     variable arg_list
-    puts "VMD Diffusion Coefficient tool. Computes one, two or three-dimensional"
-    puts "MSD-based diffusion coefficients of a chosen molecular species. "
-    puts " "
-    puts "Usage: diffusion_coefficient <args> {msd|diffusion}"
-    puts "Args (with defaults):"
+    puts "VMD Diffusion Coefficient tool. Computes one, two or three-dimensional
+MSD-based diffusion coefficients of a chosen molecular species.
+
+Usage: diffusion_coefficient <options> <command>
+
+Command is one of:
+msd <NN>      Compute mean squared displacement (MSD) at a tau of
+              NN frames; equivalent to msd_interval -from NN -to NN.
+              Returns a value as Angstrom^2 . This is the recommended 
+              way of using the plugin.
+msd_range     Compute MSD for tau between -from and -to (mandatory)
+              Returns two lists of {tau} {MSD(tau)}
+d_range       Compute D(tau)=MSD(tau)/(2*D*tau) between -from and
+              -to (mandatory). Returns two lists of {tau} {D(tau)}
+
+See http://multiscalelab.org/utilities/DiffusionCoefficientTool for
+definitions. If you don't understand what MSD(tau) is, don't use this
+tool.
+
+Toni Giorgino, ISIB-National Research Council of Italy.
+
+Options (with defaults):"
     foreach k $arg_list {
 	puts "   -$k \"$arg($k)\""
     }
-    puts " "
-    puts "msd: return mean-squared displacements at each lag time tau"
-    puts "diffusion: return MSD(tau)/(2*D*tau)"
-    puts " "
-    puts "See http://multiscalelab.org/utilities/DiffusionCoefficientTool"
+
 }
 
 
 # Command line parsing (sets namespace variables). TODO: allow short
 # substrings, e.g. -sel
 proc ::diffusion_coefficient::parse_args {args} {
-    variable dp_args
-    foreach {a v} $args {
-	if {![regexp {^-} $a]} {
-	    error "Argument should start with -: $a"
-	} 
-	set a [string trimleft $a -]
-	if {![info exists dp_args($a)]} {
-	    error "Unknown argument: $a"
-	} 
-	set dp_args($a) $v
+    variable arg
+
+    for {set i 0} {$i<[llength $args]} {incr i} {
+	set a [lindex $args $i]
+	if [regexp {^-} $a] {
+	    set a [string trimleft $a -]
+	    if {![info exists arg($a)]} {
+		error "Unknown option: $a"
+	    } else {
+		incr i
+		set v [lindex $args $i]
+		set arg($a) $v
+	    }
+	} elseif {$a == "msd"} {
+	    incr i
+	    set v [lindex $args $i]
+	    set arg(command) $a
+	    set arg(command_arg) $v
+	} elseif {$a == "msd_range"  || $a == "d_range" } {
+	    set arg(command) $a
+	} else {
+	    error "Unknown command: $a"
+	}
     }
 }
 
@@ -88,10 +116,31 @@ proc ::diffusion_coefficient::diffusion_coefficient {args} {
 	return
     } 
     eval parse_args $args
-    parray arg
 
+    # Handle commands
+    switch $arg(command) {
+	msd {
+	    set tau $arg(command_arg)
+	    set arg(from) $tau
+	    set arg(to)   $tau
+	    set arg(step) $tau
+	    set arg(command) msd_range
+	    lassign [compute_avg_msd] tlist msdlist
+	    return [lindex $msdlist 0]
+	}
+	msd_range {
+	    return [compute_avg_msd] 
+	}
+	d_range {
+	    lassign [compute_avg_msd] tlist msdlist
+	    set dlist [msd_to_d $tlist $msdlist]
+	    return [list $tlist $dlist]
+	}
+	default {
+	    error "Unknown command."
+	}
+    }
 
-    # Compute the bare histogram
 
 }
 
@@ -101,9 +150,9 @@ proc ::diffusion_coefficient::set_default_interval {} {
     variable arg
     if [molinfo num] {
 	set nf [molinfo top get numframes]
-	set arg(window_from) 0
-	set arg(window_to) [expr $nf-1]
-	set arg(window_every) 1
+	set arg(interval_from) 0
+	set arg(interval_to) [expr $nf-1]
+	set arg(interval_stride) 1
     }
 }
 
@@ -161,24 +210,6 @@ proc diffusion_coefficient::set_status {msg} {
 
 
 
-# Gets tau, MSD(tau) and returns MSD(tau)/2/D/tau
-proc diffusion_coefficient::msd_to_d {tau_list msd_list} {
-    variable arg
-
-    # Number of dimensions
-    set alongx $arg(alongx)
-    set alongy $arg(alongy)
-    set alongz $arg(alongz)
-    set ND [expr $alongx+$alongy+$alongz]
-
-    set dt $arg(dt)
-    foreach tau $tau_list msd $msd_list {
-	lappend d_list [expr $msd/2.0/$tau/$ND]
-    }
-    return $d_list
-}
-
-
 
 
 # Uses class-variables xt, yt, zt
@@ -224,9 +255,9 @@ proc diffusion_coefficient::compute_avg_msd {} {
     set from $arg(from)
     set to $arg(to)
     set step $arg(step)
-    set window_from $arg(window_from)
-    set window_to $arg(window_to)
-    set window_every $arg(window_every)
+    set interval_from $arg(interval_from)
+    set interval_to $arg(interval_to)
+    set interval_stride $arg(interval_stride)
 
     set alongx $arg(alongx); set alongy $arg(alongy); set alongz $arg(alongz)
     
@@ -241,7 +272,7 @@ proc diffusion_coefficient::compute_avg_msd {} {
 
 
     if {$to=="last"}		{ set to [expr $N-1] }
-    if {$window_to=="last"}	{ set window_to [expr $N-1] }
+    if {$interval_to=="last"}	{ set interval_to [expr $N-1] }
 
     # make three monster arrays x/y/z arranged for easy indexing
     # lindex $xt 4   returns the vector of all X's at time 4
@@ -269,25 +300,45 @@ proc diffusion_coefficient::compute_avg_msd {} {
 	set msdavg 0
 	set ns 0
 	# and slide them
-	for {set t0 $window_from} \
-	    {$t0<[expr $window_to-$ws]} \
-	    {incr t0 $window_every} {
+	for {set t0 $interval_from} \
+	    {$t0<[expr $interval_to-$ws]} \
+	    {incr t0 $interval_stride} {
 		set t1 [expr $t0+$ws]
 		set msd [msd_between  $t0 $t1]
 		set msdavg [expr $msdavg+$msd]
 		incr ns
 	    }
 
-	# convert frames into ns
-	set tau [expr $ws*$arg(dt)/1000.]
+	# convert frames into time units
+	set tau [expr $ws*$arg(dt)]
 	lappend tau_list $tau
 	lappend msd_list [expr 1.*$msdavg/$ns]
 
 	set_status [format "Computing: %2.0f%% done" \
-		    [expr 100.*($ws-$from)/($to-$from)] ]
+		    [expr 100.*($ws-$from+1)/($to-$from+1)] ]
     }
 
     # return
     set_status "Ready"
     return [list $tau_list $msd_list]
 }
+
+
+
+# Gets tau, MSD(tau) and returns MSD(tau)/2/D/tau
+proc diffusion_coefficient::msd_to_d {tau_list msd_list} {
+    variable arg
+
+    # Number of dimensions
+    set alongx $arg(alongx)
+    set alongy $arg(alongy)
+    set alongz $arg(alongz)
+    set ND [expr $alongx+$alongy+$alongz]
+
+    set dt $arg(dt)
+    foreach tau $tau_list msd $msd_list {
+	lappend d_list [expr $msd/2.0/$tau/$ND]
+    }
+    return $d_list
+}
+

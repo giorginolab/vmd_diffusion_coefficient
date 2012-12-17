@@ -1,0 +1,44 @@
+\documentclass{article}
+\usepackage{amsmath}
+\begin{document}
+\thispagestyle{empty}
+\pagestyle{empty}  
+% convert -density 150 -trim formulas.pdf formulas.png
+
+Mean squared displacement is the usual definition:
+%
+$$\mbox{MSD}(\tau)= \langle | \mathbf r (\tau) - \mathbf r(0) |^2 \rangle $$
+
+The average, written explicitly, is done over windows of span $\tau$
+that can be constructed in the interval $[w_f \dots w_t]$. To reduce
+computation, this average will be done with a stride of $w_s$ (i.e.\
+only one window every $w_s$ will be considered):
+%
+$$\mbox{MSD}(\tau)= \underbrace{ 
+  \frac{w_s}{w_t-w_f-\tau} 
+  \sum_{t_0=w_f \mbox{ \scriptsize every } w_s}^{w_t-\tau-1}
+ }_{\mbox{Average over intervals of span $\tau$ }}  
+ \underbrace{ 
+   \frac{1}{N}
+   \sum_{i=1}^N
+   \left(
+     \mathbf r_i(t_0+\tau) - \mathbf r_i(t_0) 
+   \right)^2
+ }_{\mbox{Average over selected atoms}}
+$$
+
+When the center of mass drift subtraction is enabled, the following
+replacement is applied to the above formula:
+%
+$$\mathbf r(t) \to \mathbf r(t)-\mathbf r_0(t)$$
+%
+where $\mathbf r_0(t)$ is the position of the center
+of mass of the selected atoms at time $t$:
+%
+$$\mathbf r_0(t)=\sum_{i=1}^N \mathbf r_i(t) /N$$
+
+
+
+
+\end{document}
+
