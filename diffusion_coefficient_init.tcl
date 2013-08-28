@@ -19,5 +19,10 @@
 #
 # $Id: diffusion_coefficient_init.tcl 854 2011-05-24 17:11:45Z toni $ 
 
-package require diffusion_coefficient_gui
-package require diffusion_coefficient
+#package require diffusion_coefficient_gui
+#package require diffusion_coefficient
+
+vmd_install_extension diffusion_coefficient_gui \
+            diffusion_coefficient_gui::diffusion_coefficient_tk \
+                    "Analysis/Diffusion Coefficient Tool"
+                    

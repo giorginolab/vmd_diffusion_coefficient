@@ -37,9 +37,6 @@ set diffusion_coefficient_gui::in_vmd \
     [string length [info proc vmd_install_extension]]
 if { $diffusion_coefficient_gui::in_vmd } {
     package require diffusion_coefficient
-    vmd_install_extension diffusion_coefficient_gui \
-	diffusion_coefficient_gui::diffusion_coefficient_tk \
-	"Analysis/Diffusion Coefficient Tool"
 } else {
     #  Kludge to run outside VMD
     namespace eval ::diffusion_coefficient:: {}
