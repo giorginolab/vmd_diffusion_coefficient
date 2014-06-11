@@ -1,7 +1,7 @@
 .SILENT:
 
 VMFILES = pkgIndex.tcl diffusion_coefficient_gui.tcl diffusion_coefficient_gui_ui.tcl diffusion_coefficient.tcl
-VMVERSION = 1.2
+VMVERSION = 1.0
 DIR = $(PLUGINDIR)/noarch/tcl/diffusion_coefficient(VMVERSION)
 
 
