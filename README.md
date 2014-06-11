@@ -1,5 +1,5 @@
 VMD Diffusion Coefficient Tool
-----------------------------------------
+================================
 
 Toni Giorgino — © ISIB-CNR 2012, Universitat Pompeu Fabra 2011
 
@@ -15,4 +15,17 @@ Important: please check the current version of software and
 documentation at its home-page:
 
 http://www.multiscalelab.org/utilities/DiffusionCoefficientTool
+
+
+
+Installation
+----------------------------------------
+
+1. Download the latest release and extract it in a directory of your
+   choice. 
+
+2. Add the following instructions to your ```.vmdrc``` file 
+
+        lappend auto_path /WHERE/YOU/EXTRACTED/THE/TOOL
+        menu main on
 
