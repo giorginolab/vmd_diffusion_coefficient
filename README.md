@@ -27,5 +27,8 @@ Installation
 2. Add the following instructions to your ```.vmdrc``` file 
 
         lappend auto_path /WHERE/YOU/EXTRACTED/THE/TOOL
+        vmd_install_extension diffusion_coefficient_gui \
+      	  diffusion_coefficient_gui::diffusion_coefficient_tk \
+	        "Analysis/Diffusion Coefficient Tool"
         menu main on
 
