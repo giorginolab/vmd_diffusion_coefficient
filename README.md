@@ -21,11 +21,5 @@ http://www.multiscalelab.org/utilities/DiffusionCoefficientTool
 Installation
 ----------------------------------------
 
-1. Download the latest release and extract it in a directory of your
-   choice. 
-
-2. Add the following instructions to your ```.vmdrc``` file 
-
-        lappend auto_path /WHERE/YOU/EXTRACTED/THE/TOOL
-        menu main on
+See instructions [here](https://gist.github.com/tonigi/a9cfaf7642a7fbc13293).
 
