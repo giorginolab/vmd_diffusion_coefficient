@@ -30,6 +30,7 @@ package provide diffusion_coefficient_gui 1.0
 namespace eval diffusion_coefficient_gui {
     variable utf8_tau "\u03C4"
     variable utf8_A2 "\uc5\ub2"
+    variable already_registered 0
 }
 
 # VMD-specific stuff
@@ -42,6 +43,20 @@ if { $diffusion_coefficient_gui::in_vmd } {
     namespace eval ::diffusion_coefficient:: {}
     array set ::diffusion_coefficient::arg {}
 }
+
+
+
+# Register menu if possible
+proc diffusion_coefficient_gui::register_menu {} {
+    variable already_registered
+    if {$already_registered==0} {
+	incr already_registered
+	vmd_install_extension diffusion_coefficient_gui \
+	    diffusion_coefficient_gui::diffusion_coefficient_tk \
+	    "Analysis/Diffusion Coefficient Tool"
+    }
+}
+
 
 # Called right upon menu action
 proc diffusion_coefficient_gui::diffusion_coefficient_tk {} {
