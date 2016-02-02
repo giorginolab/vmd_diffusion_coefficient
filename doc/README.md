@@ -93,10 +93,10 @@ Invocation is self-explanatory, i.e.:
 Averaging
 ---------
 
-![formulas.png](http://www1.multiscalelab.org//utilities/DiffusionCoefficientTool?action=AttachFile&do=get&target=formulas.png)
+![formulas.png](formulas.png)
 
-|------------------|------------------------|-------------------------|
 | **Symbol above** | **GUI parameter name** | **Command line option** |
+|------------------|------------------------|-------------------------|
 | w<sub>f</sub>    | Analysis interval from | `-interval_from`        |
 | w<sub>t</sub>    | Analysis interval to   | `-interval_to`          |
 | w<sub>s</sub>    | Analysis interval step | `-interval_stride`      |
@@ -104,7 +104,7 @@ Averaging
 Screenshot
 ----------
 
-![gui.png](http://www1.multiscalelab.org//utilities/DiffusionCoefficientTool?action=AttachFile&do=get&target=gui.png)
+![gui.png](gui.png)
 
 Acknowledgments
 ---------------
