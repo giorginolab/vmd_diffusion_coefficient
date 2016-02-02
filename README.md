@@ -11,15 +11,5 @@ This is experimental software. If you don't know how to compute the
 diffusion coefficient yourself, probably you won't be able to use this
 software. NO support or warranty is available whatsoever.
 
-Important: please check the current version of software and 
-documentation at its home-page:
-
-http://www.multiscalelab.org/utilities/DiffusionCoefficientTool
-
-
-
-Installation
-----------------------------------------
-
-See instructions [here](https://gist.github.com/tonigi/a9cfaf7642a7fbc13293).
+Please find this software's documentation in the [doc subdirectory](doc).
 

@@ -10,14 +10,17 @@ This is beta software. If you don't know how to compute the diffusion coefficien
 
 
 
+
+
 Installation
-------------
+----------------------------------------
 
-This is beta software. By downloading the software you agree to comply with the terms of GPL version 2.
+See instructions [here](https://gist.github.com/tonigi/a9cfaf7642a7fbc13293).
 
-**NOTE: This code comes without any warranty of fitness for any use. It is UNSUPPORTED. After you download it, you are on your own.**
 
-[Download](https://github.com/tonigi/vmd_diffusion_coefficient/releases/latest) and follow the instructions therein.
+**NOTE: This code comes without any warranty of fitness for any use. It is UNSUPPORTED. After you download it, you are on your own.** By downloading the software you agree to comply with the terms of the
+3-clause BSD license.
+ 
 
 You may or may not be able to get support by posting to the [External tools](https://sourceforge.net/p/membplugin/discussion/external_tools/) forum hosted at the [MEMBPLUGIN](http://membplugin.sourceforge.net) site.
 
@@ -30,11 +33,6 @@ Please cite the following publication:
 Toni Giorgino, Computing diffusion coefficients in macromolecular simulations: the Diffusion Coefficient Tool for VMD, Submitted (2015). Available from [](https://github.com/tonigi/vmd_diffusion_coefficient/).
 
 
-License
--------
-
-By downloading the software you agree to comply with the terms of the
-3-clause BSD license.
 
 
 Usage (GUI)
