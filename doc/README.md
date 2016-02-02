@@ -1,17 +1,14 @@
-Diffusion Coefficient Tool (beta)
-=================================
+Diffusion Coefficient Tool
+==========================
 
-Toni Giorgino
-
--   2012- (ISIB-CNR) Consiglio Nazionale delle Ricerche
-
-    2009-2011 (GRIB-IMIM-UPF) Computational Biophysics Laboratory
 
 The [Diffusion Coefficient Tool](#) is an analysis plugin for VMD that computes one, two or three-dimensional mean squared displacements (MSD)-based diffusion coefficients of a chosen molecular species.
 
 This is beta software. If you don't know how to compute the diffusion coefficient yourself, probably you won't be able to use this software. **NO support or warranty is available whatsoever.**
 
 **Repeat.** The Diffusion Coefficient Tool is not a magic box. It only computes mean squared displacements (MSD) at a variety of lag times (τ). The MSD is predicted by Einstein's relation to grow linearly with τ. Most often than not, this DOES NOT occur in practice, for a variety of reasons, including poor sampling or non-diffusive behavior. It is YOUR responsibility to understand why and, if you trust the linearity, to fit the slope. Please consider the following paper to be **mandatory reading**: [David Keffer, The Working Man's Guide to Obtaining Self Diffusion Coefficients from Molecular Dynamics Simulations](http://utkstair.org/clausius/docs/che548/pdf/selfD.pdf).
+
+
 
 Installation
 ------------
@@ -24,12 +21,21 @@ This is beta software. By downloading the software you agree to comply with the 
 
 You may or may not be able to get support by posting to the [External tools](https://sourceforge.net/p/membplugin/discussion/external_tools/) forum hosted at the [MEMBPLUGIN](http://membplugin.sourceforge.net) site.
 
-Citation and license
---------------------
+
+Citation
+--------
 
 Please cite the following publication:
 
-Toni Giorgino, Computing diffusion coefficients in macromolecular simulations: the Diffusion Coefficient Tool for VMD, Submitted (2014). Available from [](http://multiscalelab.org/utilities/DiffusionCoefficientTool) (accessed xxx, xxx 2013).
+Toni Giorgino, Computing diffusion coefficients in macromolecular simulations: the Diffusion Coefficient Tool for VMD, Submitted (2015). Available from [](https://github.com/tonigi/vmd_diffusion_coefficient/).
+
+
+License
+-------
+
+By downloading the software you agree to comply with the terms of the
+3-clause BSD license.
+
 
 Usage (GUI)
 -----------
@@ -54,13 +60,17 @@ The results are given in Å<sup>2</sup>/ns. Conversion factors:
 
 Upon completion, the location of a data file with the computed profiles will be printed on the console.
 
-**Warnings**:
+
+Warnings
+--------
 
 -   **Don't draw premature conclusions.** Computing converged diffusion coefficients is likely beyond your sampling capacity and patience, unless done for plenty of molecules (ie. solvent). Expect **microseconds** sampling.
 
 -   The trajectory must not be wrapped.
 
 -   A check is performed whether bonds exist between the selected atoms. This check may fail if wrong connectivity is inferred on molecule load;
+
+
 
 Usage (command line)
 --------------------
@@ -90,6 +100,7 @@ Invocation is self-explanatory, i.e.:
     -d range      Compute D(tau)=MSD(tau)/(2*D*tau) between -from and
                   -to (mandatory). Returns two lists of {tau} {D(tau)}
 
+
 Averaging
 ---------
 
@@ -101,10 +112,13 @@ Averaging
 | w<sub>t</sub>    | Analysis interval to   | `-interval_to`          |
 | w<sub>s</sub>    | Analysis interval step | `-interval_stride`      |
 
+
 Screenshot
 ----------
 
 ![gui.png](gui.png)
+
+
 
 Acknowledgments
 ---------------
