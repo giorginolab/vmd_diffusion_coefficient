@@ -104,11 +104,11 @@ Averaging
 
 ![formulas.png](formulas.png)
 
-| **Symbol above** | **GUI parameter name** | **Command line option** |
-|------------------|------------------------|-------------------------|
-| w<sub>f</sub>    | Analysis interval from | `-interval_from`        |
-| w<sub>t</sub>    | Analysis interval to   | `-interval_to`          |
-| w<sub>s</sub>    | Analysis interval step | `-interval_stride`      |
+| Symbol above  | GUI parameter name     | Command line option |
+|---------------|------------------------|---------------------|
+| w<sub>f</sub> | Analysis interval from | `-interval_from`    |
+| w<sub>t</sub> | Analysis interval to   | `-interval_to`      |
+| w<sub>s</sub> | Analysis interval step | `-interval_stride`  |
 
 
 Screenshot
