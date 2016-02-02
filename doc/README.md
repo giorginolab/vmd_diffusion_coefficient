@@ -30,7 +30,7 @@ Citation
 
 Please cite the following publication:
 
-Toni Giorgino, Computing diffusion coefficients in macromolecular simulations: the Diffusion Coefficient Tool for VMD, Submitted (2015). Available from [](https://github.com/tonigi/vmd_diffusion_coefficient/).
+Toni Giorgino, Computing diffusion coefficients in macromolecular simulations: the Diffusion Coefficient Tool for VMD, Submitted (2015). Available from [GitHub](https://github.com/tonigi/vmd_diffusion_coefficient/).
 
 
 
