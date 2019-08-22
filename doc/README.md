@@ -103,7 +103,7 @@ correspondence between the GUI and function arguments.
 
 
 | GUI text            | Function argument | Default value          |
-|---------------------+-------------------+------------------------|
+|---------------------|-------------------|------------------------|
 | Selection           | `-selection`      | `water and name OH`    |
 | Diffusion along     | `-alongx`, etc.   | 3D                     |
 | Subtract drift      | `-remove_drift`   | Enabled                |
