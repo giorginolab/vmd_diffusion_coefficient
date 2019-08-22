@@ -61,7 +61,7 @@ Upon completion, the location of a data file with the computed profiles will be 
 Warnings
 --------
 
--   **Don't draw premature conclusions.** Computing converged diffusion coefficients is likely beyond your sampling capacity and patience, unless done for plenty of molecules (ie. solvent). Expect **microseconds** sampling.
+-   Computing converged diffusion coefficients is likely beyond your sampling capacity and patience, unless done for plenty of molecules (ie. solvent). Don't draw premature conclusions: expect **microseconds** sampling.
 
 -   The trajectory must not be wrapped.
 
