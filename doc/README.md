@@ -98,6 +98,25 @@ Invocation is self-explanatory, i.e.:
                   -to (mandatory). Returns two lists of {tau} {D(tau)}
 
 
+The following table lists the
+correspondence between the GUI and function arguments.
+
+
+| GUI text            | Function argument | Default value          |
+|---------------------+-------------------+------------------------|
+| Selection           | `-selection`      | `water and name OH`    |
+| Diffusion along     | `-alongx`, etc.   | 3D                     |
+| Subtract drift      | `-remove_drift`   | Enabled                |
+| $\tau$ from         | `-from`           | Trajectory length / 10 |
+| $\tau$ to           | `-to`             | Trajectory length / 2  |
+| $\tau$ step         | `-step`           | Trajectory length / 50 |
+| Analysis from       | `-interval_from`  | Trajectory start       |
+| Analysis to         | `-interval_to`    | Trajectory end         |
+| Analysis step       | `-interval_step`  | All frames             |
+| Time between frames | `-dt`             | 1 ns                   |
+
+
+
 Averaging
 ---------
 
