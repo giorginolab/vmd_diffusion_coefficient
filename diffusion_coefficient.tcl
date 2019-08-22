@@ -5,7 +5,7 @@
 # LICENSE file for copyright information.
 
 # Toni Giorgino, ISIB-Consiglio Nazionale delle Ricerche, 2012
-# http://multiscalelab.org/utilities/DiffusionCoefficientTool 
+# https://github.com/giorginolab/vmd_diffusion_coefficient/
 
 package provide diffusion_coefficient 1.0
 
@@ -66,7 +66,7 @@ Command is one of:
 -d range      Compute D(tau)=MSD(tau)/(2*D*tau) between -from and
               -to (mandatory). Returns two lists of {tau} {D(tau)}
 
-See http://multiscalelab.org/utilities/DiffusionCoefficientTool for
+See https://github.com/giorginolab/vmd_diffusion_coefficient/ for
 definitions. If you don't understand what MSD(tau) is, don't use this
 tool.
 

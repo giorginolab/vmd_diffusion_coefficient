@@ -76,7 +76,7 @@ proc diffusion_coefficient_gui::diffusion_coefficient_tk {} {
 }
 
 proc diffusion_coefficient_gui::help_docs {} {
-    vmd_open_url http://multiscalelab.org/utilities/DiffusionCoefficientTool
+    vmd_open_url https://github.com/giorginolab/vmd_diffusion_coefficient/
 }
 
 proc diffusion_coefficient_gui::help_about {} {
