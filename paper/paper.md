@@ -107,13 +107,13 @@ reason, the plugin provides an atom selection, which must match one
 atom per diffusing molecule, for MSD values to be averaged over.
 
 
-# Notes
 
-Some MD simulation software (notably GROMACS) tend to write
-trajectories in the *wrapped* format, i.e., with atom positions
-remapped to the "origin" periodic image.  This format is inappropriate
-for MSD calculations: trajectories have to be unwrapped first (use the `pbc unwrap`
-or `gmx trjconv` tools).
+# Related tools
+
+The `gmx msd` command line utility is distributed with GROMACS and
+performs the MSD calculation [@lekmul_proteins_2019].  MEMBPLUGIN is a
+VMD plugin which implements additional analysis types specifically for
+quasi-planar bilayer simulations [@guixa-gonzalez_membrane_2016].
 
 
 

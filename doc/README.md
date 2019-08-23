@@ -2,11 +2,9 @@ Diffusion Coefficient Tool
 ==========================
 
 
-The [Diffusion Coefficient Tool](#) is an analysis plugin for VMD that computes one, two or three-dimensional mean squared displacements (MSD)-based diffusion coefficients of a chosen molecular species.
-
-
-**Note.** The Diffusion Coefficient Tool is not a magic box. It only computes mean squared displacements (MSD) at a variety of lag times (τ). The MSD is predicted by Einstein's relation to grow linearly with τ. Most often than not, this DOES NOT occur in practice, for a variety of reasons, including poor sampling or non-diffusive behavior. It is YOUR responsibility to understand why and, if you trust the linearity, to fit the slope. Please consider the following paper to be **mandatory reading**: [David Keffer, The Working Man's Guide to Obtaining Self Diffusion Coefficients from Molecular Dynamics Simulations](http://utkstair.org/clausius/docs/che548/pdf/selfD.pdf).
-
+The [Diffusion Coefficient Tool](#) is an analysis plugin for VMD that
+computes one, two or three-dimensional mean squared displacements
+(MSD)-based diffusion coefficients of a chosen molecular species.
 
 
 
@@ -14,22 +12,18 @@ The [Diffusion Coefficient Tool](#) is an analysis plugin for VMD that computes 
 Installation
 ----------------------------------------
 
-See instructions [here](https://gist.github.com/tonigi/a9cfaf7642a7fbc13293).
+VMD 1.9.2 or later is required. For installation
+instructions, please see [here](https://gist.github.com/tonigi/a9cfaf7642a7fbc13293).
 
 
-**NOTE: This code comes without any warranty of fitness for any use. It is UNSUPPORTED.** By downloading the software you agree to comply with the terms of the
-3-clause BSD license.
  
-
-You may or may not be able to get support by posting to the [External tools](https://sourceforge.net/p/membplugin/discussion/external_tools/) forum hosted at the [MEMBPLUGIN](http://membplugin.sourceforge.net) site.
-
 
 Citation
 --------
 
 Please cite the following publication:
 
-Toni Giorgino, Computing diffusion coefficients in macromolecular simulations: the Diffusion Coefficient Tool for VMD, Submitted (2015). Available from [GitHub](https://github.com/tonigi/vmd_diffusion_coefficient/).
+Toni Giorgino, Computing diffusion coefficients in macromolecular simulations: the Diffusion Coefficient Tool for VMD, Submitted (2015). Available from [GitHub](https://github.com/giorginolab/vmd_diffusion_coefficient/).
 
 
 
@@ -57,15 +51,6 @@ The results are given in Å<sup>2</sup>/ns. Conversion factors:
 
 Upon completion, the location of a data file with the computed profiles will be printed on the console.
 
-
-Warnings
---------
-
--   Computing converged diffusion coefficients is likely beyond your sampling capacity and patience, unless done for plenty of molecules (ie. solvent). Don't draw premature conclusions: expect **microseconds** sampling.
-
--   The trajectory must not be wrapped.
-
--   A check is performed whether bonds exist between the selected atoms. This check may fail if wrong connectivity is inferred on molecule load;
 
 
 
@@ -129,15 +114,72 @@ Averaging
 | w<sub>s</sub> | Analysis interval step | `-interval_stride`  |
 
 
+
+
+Notes
+-----
+
+-   The Diffusion Coefficient Tool is not a magic box. It only
+    computes mean squared displacements (MSD) at a variety of lag
+    times (τ). The MSD is predicted by Einstein's relation to grow
+    linearly with τ. Most often than not, this DOES NOT occur in
+    practice, for a variety of reasons, including poor sampling or
+    non-diffusive behavior. It is YOUR responsibility to understand
+    why and, if you trust the linearity, to fit the slope. Please
+    consider the following paper to be **mandatory reading**: [David
+    Keffer, The Working Man's Guide to Obtaining Self Diffusion
+    Coefficients from Molecular Dynamics
+    Simulations](http://utkstair.org/clausius/docs/che548/pdf/selfD.pdf).
+
+-   Computing converged diffusion coefficients is likely beyond your
+    sampling capacity and patience, unless done for plenty of
+    molecules (ie. solvent). Don't draw premature conclusions: expect
+    **microseconds** sampling.
+
+-   The trajectory must not be wrapped. Some MD simulation software
+    (notably GROMACS) tend to write trajectories in the *wrapped*
+    format, i.e., with atom positions remapped to the "origin"
+    periodic image.  This format is inappropriate for MSD
+    calculations: trajectories have to be unwrapped first (use the
+    `pbc unwrap` or `gmx trjconv` tools).
+
+-   A check is performed whether bonds exist between the selected
+    atoms. This check may fail if wrong connectivity is inferred on
+    molecule load.
+
+
+
+
 Screenshot
 ----------
 
 ![gui.png](gui.png)
 
 
+Support
+-------
+
+**NOTE: This code comes without any warranty of fitness for any
+use. It is UNSUPPORTED.** 
+You may or may not be able to get support by posting to the [External
+tools](https://sourceforge.net/p/membplugin/discussion/external_tools/)
+forum hosted at the [MEMBPLUGIN](http://membplugin.sourceforge.net)
+site.
+
+
+License
+-------
+
+By downloading the software you agree to
+comply with the terms of the 3-clause BSD license.
+
+
+
+
 
 Acknowledgments
 ---------------
 
-Former support from the Agència de Gestió d'Ajuts Universitaris i de Recerca - Generalitat de Catalunya is gratefully acknowledged.
+Former support from the Agència de Gestió d'Ajuts Universitaris i de
+Recerca - Generalitat de Catalunya is gratefully acknowledged.
 
