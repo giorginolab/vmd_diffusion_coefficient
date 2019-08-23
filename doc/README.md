@@ -15,8 +15,12 @@ Installation
 VMD 1.9.2 or later is required. For installation
 instructions, please see [here](https://gist.github.com/tonigi/a9cfaf7642a7fbc13293).
 
-To test see the [regtest](../regtest/regtest.tcl) script. It
-can be launched e.g. with
+
+Test
+----------
+
+See the [regtest.tcl](../regtest/regtest.tcl) script in the `regtest`
+directory. It can be launched e.g. with
 
     vmd -dispdev none regtest.tcl
 
@@ -26,14 +30,6 @@ study](https://sourceforge.net/projects/membplugin/files/Case%20Study/CaseStudy_
 for the [MEMBPLUGIN
 tool](https://academic.oup.com/bioinformatics/article/30/10/1478/266901#supplementary-data).
  
-
-Citation
---------
-
-Please cite the following publication:
-
-> Toni Giorgino, Computing diffusion coefficients in macromolecular simulations: the Diffusion Coefficient Tool for VMD, Submitted (2015). Available from [GitHub](https://github.com/giorginolab/vmd_diffusion_coefficient/).
-
 
 
 
@@ -163,6 +159,16 @@ Screenshot
 ----------
 
 ![gui.png](gui.png)
+
+
+
+Citation
+--------
+
+Please cite the following publication:
+
+> Toni Giorgino, Computing diffusion coefficients in macromolecular simulations: the Diffusion Coefficient Tool for VMD, Submitted (2015). Available from [GitHub](https://github.com/giorginolab/vmd_diffusion_coefficient/).
+
 
 
 Support
