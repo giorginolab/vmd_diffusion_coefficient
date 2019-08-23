@@ -97,9 +97,9 @@ correspondence between the GUI and function arguments.
 | Selection           | `-selection`      | `water and name OH`    |
 | Diffusion along     | `-alongx`, etc.   | 3D                     |
 | Subtract drift      | `-remove_drift`   | Enabled                |
-| $\tau$ from         | `-from`           | Trajectory length / 10 |
-| $\tau$ to           | `-to`             | Trajectory length / 2  |
-| $\tau$ step         | `-step`           | Trajectory length / 50 |
+| τ from              | `-from`           | Trajectory length / 10 |
+| τ to                | `-to`             | Trajectory length / 2  |
+| τ step              | `-step`           | Trajectory length / 50 |
 | Analysis from       | `-interval_from`  | Trajectory start       |
 | Analysis to         | `-interval_to`    | Trajectory end         |
 | Analysis step       | `-interval_step`  | All frames             |
