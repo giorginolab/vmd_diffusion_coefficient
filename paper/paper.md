@@ -65,16 +65,17 @@ Analysis - Diffusion Coefficient Tool* menu. The analysis is run on the
 currently loaded trajectory in the *top* molecule (Figure 1).
 The diffusion coefficient tool can be used either interactively with
 its graphical user interface (GUI, Figure 1), or calling the 
-`diffusion_coefficient` function in VMD's embedded TCL language.
+`diffusion_coefficient` procedure in VMD's embedded TCL language.
 
-The tool can compute either $M(\tau)$ (GUI button "MSD displacement", command line argument `-msd`) or
+The tool can compute either $M(\tau)$ ("MSD displacement" GUI button,
+or procedure argument `-msd`) or
  $D(\tau)$, valid as long as diffusivity holds ("Diffusion coefficient",
-option `-d`. The results are either plotted (GUI) or returned as a 
-list (function call).  The following table lists the
-correspondence between the GUI and function arguments.
+or argument `-d`). The results are either plotted (GUI) or returned as a 
+list (procedure call).  The following table lists the
+correspondence between the GUI and procedure arguments.
 
 
-| GUI text            | Function argument | Default value          |
+| GUI text            | Procedure argument | Default value          |
 |---------------------+-------------------+------------------------|
 | Selection           | `-selection`      | `water and name OH`    |
 | Diffusion along     | `-alongx`, etc.   | 3D                     |
@@ -97,7 +98,8 @@ span $\tau$ that can be constructed in the analysis interval, strided by an
  interval *step*. The analysis is repeated for the chosen values of $\tau$, ranging
 from a minimum to a maximum, again with a stride.
 
-![The time-averaging scheme.](drawing.svg)
+![The interval selection window and time-averaging scheme. The
+MSD samples being averaged are indicated by shades of grey.](drawing.svg)
 
 Note that obtaining *converged* MSD values from MD simulations requires
 an aggregated sampling much larger than the characteristic time $\tau$.
