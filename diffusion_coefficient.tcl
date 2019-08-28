@@ -31,6 +31,7 @@ namespace eval ::diffusion_coefficient:: {
 	interval_stride	-
 	d               -
 	msd             -
+	fitD            -
     }
     array set arg $arg_defaults
 
@@ -65,12 +66,16 @@ Command is one of:
               Returns two lists of {tau} {MSD(tau)}
 -d range      Compute D(tau)=MSD(tau)/(2*D*tau) between -from and
               -to (mandatory). Returns two lists of {tau} {D(tau)}
+-fitD range   Compute D by a linear fit of MSD over the specified
+              range. Returns a list of {D D_err S S_err} where
+              D is the MSD slope divided by 2D; S is the MSD intercept; 
+              and _err are the respective standard errors.
 
 See https://github.com/giorginolab/vmd_diffusion_coefficient/ for
 definitions. If you don't understand what MSD(tau) is, don't use this
 tool.
 
-Toni Giorgino, ISIB-National Research Council of Italy.
+Toni Giorgino, National Research Council of Italy.
 
 Options (with defaults):"
     foreach k $arg_list {
@@ -118,9 +123,8 @@ proc ::diffusion_coefficient::diffusion_coefficient {args} {
     parray arg
 
 
-    if { ($arg(msd)=="-" && $arg(d)=="-") ||
-         ($arg(msd)!="-" && $arg(d)!="-") } {
-	error "Exactly one of -msd or -d must be given"
+    if { ($arg(msd)!="-") + ($arg(d)!="-") + ($arg(fitD)!="-") != 1 } {
+	error "Exactly one of -msd, -d, or -fitD must be given"
     }
 
     # Execute
@@ -134,9 +138,13 @@ proc ::diffusion_coefficient::diffusion_coefficient {args} {
 	lassign [compute_avg_msd] tlist msdlist
 	return [lindex $msdlist 0]
     } elseif { $arg(d)=="range" } { # D range
-	    lassign [compute_avg_msd] tlist msdlist
-	    set dlist [msd_to_d $tlist $msdlist]
-	    return [list $tlist $dlist]
+	lassign [compute_avg_msd] tlist msdlist
+	set dlist [msd_to_d $tlist $msdlist]
+	return [list $tlist $dlist]
+    } elseif { $arg(fitD)=="range" } {
+	lassign [compute_avg_msd] tlist msdlist
+	set dfit [msd_fit $tlist $msdlist]
+	return $dfit
     } else {
 	error "Unknown invokation type."
     }
@@ -344,6 +352,34 @@ proc diffusion_coefficient::msd_to_d {tau_list msd_list} {
     }
     return $d_list
 }
+
+
+# Gets tau, MSD(tau) and returns MSD(tau)/2/D/tau, intercept, and
+# standard errors computed by linear fits.
+proc diffusion_coefficient::msd_fit {tau_list msd_list} {
+    variable arg
+
+    set dt $arg(dt)
+
+    set fit [linear-model $tau_list $msd_list 1]
+    set fit_slope [lindex $fit 1]
+    set fit_int   [lindex $fit 0]
+    set fit_slope_se [lindex $fit 7]
+    set fit_int_se [lindex $fit 5]
+
+    set out [list \
+     	     [expr $fit_slope/2.0/[nd] ] \
+     	     [expr $fit_slope_se/2.0/[nd] ] \
+     	     $fit_int \
+     	     $fit_int_se]
+
+    set_status [format "Fit value: %.4g \xB1 %.4g \xC5\xB2/ns (intercept %.4g \xB1 %.4g \xC5\xB2)" {*}$out]
+    
+    return $out
+}
+
+
+
 
 
 

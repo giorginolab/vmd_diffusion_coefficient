@@ -71,11 +71,12 @@ its graphical user interface (GUI, Figure 1), or calling the
 `diffusion_coefficient` procedure in VMD's embedded TCL language.
 
 The tool can compute either $M(\tau)$ ("MSD displacement" GUI button,
-or procedure argument `-msd`) or
- $D(\tau)$, valid as long as diffusivity holds ("Diffusion coefficient",
-or argument `-d`). The results are either plotted (GUI) or returned as a 
-list (procedure call).  The following table lists the
-correspondence between the GUI and procedure arguments.
+or procedure argument `-msd`) or $D(\tau)$, valid as long as
+diffusivity holds ("Diffusion coefficient", or argument `-d`). $D$ and
+the corresponding error can also be computed via linear fit of the MSD
+(argument `-fitD`).  The results are either plotted (GUI) or returned as
+a list (procedure call).  The following table lists the correspondence
+between the GUI and procedure arguments.
 
 
 | GUI text            | Procedure argument | Default value          |

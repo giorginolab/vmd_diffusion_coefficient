@@ -1,9 +1,9 @@
 # GUIBUILDER FILE Build 146
-# Created: 2012-12-17 15:33:07 by GUI Builder Build 146
+# Created: 2019-08-28 13:45:42 by GUI Builder Build 146
 language tcl 8.4
 widget {Tk frame} f {
 	geometry min_column {40 40}
-	geometry min_row {16 24 42 12 4 2 21 40 40}
+	geometry min_row {16 24 42 12 4 2 21 40 23}
 	geometry pad_column {0 0}
 	geometry pad_row {0 0 0 0 0 0 0 0 0}
 	geometry resize_column {0 3}
@@ -42,14 +42,14 @@ widget {Tk frame} _frame_2 {
 	geometry -row 9
 	geometry -rowspan 1
 	geometry -sticky ew
-	geometry min_column {2 40}
-	geometry min_row 2
-	geometry pad_column {0 0}
-	geometry pad_row 0
-	geometry resize_column {3 3}
-	geometry resize_row 0
-	geometry weight_column {1 1}
-	geometry weight_row 0
+	geometry min_column {40 14 2 40}
+	geometry min_row {21 2}
+	geometry pad_column {0 0 0 0}
+	geometry pad_row {0 0}
+	geometry resize_column {0 0 3 3}
+	geometry resize_row {1 3}
+	geometry weight_column {0 0 1 1}
+	geometry weight_row {0 1}
 	data GROUP Tk
 	data ID _frame_2
 	data MASTER {}
@@ -337,9 +337,9 @@ widget {Tk checkbutton} _checkbutton_3 {
 widget {Tk button} _button_3 {
 	configure -font {helvetica 10 bold}
 	configure -text {MSD displacement}
-	geometry -column 1
+	geometry -column 3
 	geometry -columnspan 1
-	geometry -row 1
+	geometry -row 2
 	geometry -rowspan 1
 	geometry -sticky nsew
 	geometry min_column {2 40}
@@ -358,9 +358,9 @@ widget {Tk button} _button_3 {
 widget {Tk button} _button_4 {
 	configure -font {helvetica 10 bold}
 	configure -text {Diffusion coefficient}
-	geometry -column 2
+	geometry -column 4
 	geometry -columnspan 1
-	geometry -row 1
+	geometry -row 2
 	geometry -rowspan 1
 	geometry -sticky nsew
 	geometry min_column {2 40}
@@ -765,11 +765,11 @@ widget {Tk button} _button_2 {
 widget {Tk label} _label_7 {
 	configure -font {helvetica 10}
 	configure -text {Generate plot for}
-	geometry -column 2
-	geometry -columnspan 1
+	geometry -column 3
+	geometry -columnspan 2
 	geometry -row 1
 	geometry -rowspan 1
-	geometry -sticky e
+	geometry -sticky ew
 	geometry min_column {2 40}
 	geometry min_row 2
 	geometry pad_column {0 0}
@@ -780,7 +780,7 @@ widget {Tk label} _label_7 {
 	geometry weight_row 0
 	data GROUP Tk
 	data ID _label_7
-	data MASTER _frame_6
+	data MASTER _frame_2
 	data TYPE {Tk label}
 }
 widget {Tk button} _button_5 {
@@ -804,6 +804,69 @@ widget {Tk button} _button_5 {
 	data GROUP Tk
 	data ID button_help
 	data MASTER _frame_6
+	data TYPE {Tk button}
+}
+widget {Tk label} _label_16 {
+	configure -font {Helvetica 13}
+	configure -text Help
+	geometry -column 2
+	geometry -columnspan 1
+	geometry -row 1
+	geometry -rowspan 1
+	geometry -sticky w
+	geometry min_column {2 40}
+	geometry min_row 2
+	geometry pad_column {0 0}
+	geometry pad_row 0
+	geometry resize_column {3 3}
+	geometry resize_row 0
+	geometry weight_column {1 1}
+	geometry weight_row 0
+	data GROUP Tk
+	data ID _label_16
+	data MASTER _frame_6
+	data TYPE {Tk label}
+}
+widget {Tk label} _label_17 {
+	configure -font {Helvetica 10}
+	configure -text {Compute and fit}
+	geometry -column 1
+	geometry -columnspan 1
+	geometry -row 1
+	geometry -rowspan 1
+	geometry -sticky {}
+	geometry min_column {2 40}
+	geometry min_row 2
+	geometry pad_column {0 0}
+	geometry pad_row 0
+	geometry resize_column {3 3}
+	geometry resize_row 0
+	geometry weight_column {1 1}
+	geometry weight_row 0
+	data GROUP Tk
+	data ID _label_17
+	data MASTER _frame_2
+	data TYPE {Tk label}
+}
+widget {Tk button} _button_6 {
+	configure -font {Helvetica 10}
+	configure -text {Diffusion coefficient}
+	geometry -column 1
+	geometry -columnspan 1
+	geometry -row 2
+	geometry -rowspan 1
+	geometry -sticky {}
+	geometry min_column {2 40}
+	geometry min_row 2
+	geometry pad_column {0 0}
+	geometry pad_row 0
+	geometry resize_column {3 3}
+	geometry resize_row 0
+	geometry weight_column {1 1}
+	geometry weight_row 0
+	data GROUP Tk
+	data ID compute_d_button
+	data MASTER _frame_2
 	data TYPE {Tk button}
 }
 menu {Menu menu} MENU {
