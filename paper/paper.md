@@ -19,7 +19,7 @@ bibliography: paper.bib
 # Summary
 
 Computing diffusion coefficients from classical molecular dynamics
-(MD) simulations is a common task used to assess solvent and lipid
+(MD) simulations is a common task when assessing solvent and lipid
 dynamics both in bulk and in confined regions. Solute-modulated
 lateral diffusion of lipids is especially interesting in biological
 membranes, where it plays a role in receptor activity and raft
@@ -33,11 +33,11 @@ species from simulated trajectories.
 
 # Method
 
-Diffusion coefficients are computed on the basis of time- and ensemble-averaged
-squared displacement (MSD) of the chosen molecular specie.  The MSD $M(\tau)$
-is defined by fixing an arbitrary time origin
-and a *lag time* $\tau$ as the mean displacement 
-over that  interval:
+Diffusion coefficients are computed on the basis of time- and
+ensemble-averaged squared displacement (MSD) of the chosen molecular
+specie.  The MSD $M(\tau)$ is defined by fixing an arbitrary time
+origin and a *lag time* $\tau$ as the mean displacement over that
+interval:
 
 $$ M(\tau) = \langle | \mathbf r (\tau) - \mathbf r(0) |^2 \rangle $$
 
@@ -52,7 +52,6 @@ coefficient can be obtained through Einstein's relation:
 $$ D(\tau) = M(\tau) / 2E\tau $$
 
 where $E$ is the (integer) dimensionality of the system. 
-
 In general, MSD values at multiple lag times are computed from the
 same trajectory to check their linearity and asymptotic slope in
 $\tau$ to check diffusivity and average out measurement errors
@@ -81,7 +80,7 @@ between the GUI and procedure arguments.
 
 | GUI text            | Procedure argument | Default value          |
 |---------------------+-------------------+------------------------|
-| Selection           | `-selection`      | `water and name OH`    |
+| Selection           | `-selection`      | `water and noh`        |
 | Diffusion along     | `-alongx`, etc.   | 3D                     |
 | Subtract drift      | `-remove_drift`   | Enabled                |
 | $\tau$ from         | `-from`           | Trajectory length / 10 |
@@ -97,13 +96,14 @@ between the GUI and procedure arguments.
 ![The main window of Diffusion Coefficient Tool](gui.png)
 
 
-The time averaging scheme employed is shown in Figure 2: windows of
-span $\tau$ that can be constructed in the analysis interval, strided by an
- interval *step*. The analysis is repeated for the chosen values of $\tau$, ranging
-from a minimum to a maximum, again with a stride.
+The time averaging scheme and interpretation of the interval window
+parameters is shown in Figure 2: averaging occurs over the windows of
+span $\tau$ that can be constructed in the analysis interval, strided
+by an *interval step*. The analysis is repeated for the chosen values
+of $\tau$, ranging from a minimum to a maximum, again with a stride.
 
-![The interval selection window and time-averaging scheme. The
-MSD samples being averaged are indicated by shades of grey.](drawing.svg)
+![The interval selection parameters and time-averaging scheme. The MSD
+samples being averaged are indicated by shades of grey.](drawing.svg)
 
 Note that obtaining *converged* MSD values from MD simulations requires
 an aggregated sampling much larger than the characteristic time $\tau$.
