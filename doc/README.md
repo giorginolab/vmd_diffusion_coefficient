@@ -12,25 +12,11 @@ computes one, two or three-dimensional mean squared displacements
 Installation
 ----------------------------------------
 
-VMD 1.9.2 or later is required. For installation
-instructions, please see [here](https://gist.github.com/tonigi/a9cfaf7642a7fbc13293).
+VMD 1.9.2 or later is required. For installation instructions, please
+see [here](https://gist.github.com/tonigi/a9cfaf7642a7fbc13293).
 
-
-Test
-----------
-
-See the [regtest.tcl](../regtest/regtest.tcl) script in the `regtest`
-directory. It can be launched e.g. with
-
-    vmd -dispdev none regtest.tcl
-
-Note that on first run the regtest will download ~250MB of simulation
-results part of the [case
-study](https://sourceforge.net/projects/membplugin/files/Case%20Study/CaseStudy_v2.pdf/download)
-for the [MEMBPLUGIN
-tool](https://academic.oup.com/bioinformatics/article/30/10/1478/266901#supplementary-data).
- 
-
+To test, see the [regtest.tcl](../demo/regtest.tcl) script in the
+`demo` directory.
 
 
 Usage (GUI)
