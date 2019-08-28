@@ -41,19 +41,22 @@ over that  interval:
 
 $$ M(\tau) = \langle | \mathbf r (\tau) - \mathbf r(0) |^2 \rangle $$
 
-where $\mathbf r(t)$ indicates the position of a particle at time $t$, and the angle brackets indicate
-an average over all particles of the species under analysis. In
-practice, to improve convergence, the
-MSD analysis is repeated  using different time
-origins, under the equilibrium assumption.
-If the system is in a diffusive regime, the diffusion coefficient 
-can be obtained through Einstein's relation:
+where $\mathbf r(t)$ indicates the position of a particle at time $t$,
+and the angle brackets indicate an average over all particles of the
+species under analysis. In practice, to improve convergence, the MSD
+analysis is repeated using different time origins, under the
+equilibrium assumption.  If the system is in a diffusive regime and
+the position measurement error is negligible, the diffusion
+coefficient can be obtained through Einstein's relation:
 
 $$ D(\tau) = M(\tau) / 2E\tau $$
 
-where $E$ is the (integer) dimensionality of the system. To check diffusivity,
-MSD values at multiple lag times are computed from the same trajectory
-to check their linearity in $\tau$.
+where $E$ is the (integer) dimensionality of the system. 
+
+In general, MSD values at multiple lag times are computed from the
+same trajectory to check their linearity and asymptotic slope in
+$\tau$ to check diffusivity and average out measurement errors
+[@martin_apparent_2002].
 
 
 

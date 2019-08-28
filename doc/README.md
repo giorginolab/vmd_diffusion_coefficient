@@ -2,9 +2,7 @@ Diffusion Coefficient Tool
 ==========================
 
 
-The [Diffusion Coefficient Tool](#) is an analysis plugin for VMD that
-computes one, two or three-dimensional mean squared displacements
-(MSD)-based diffusion coefficients of a chosen molecular species.
+The [Diffusion Coefficient Tool](#) is an analysis plugin for VMD that computes one, two or three-dimensional mean squared displacements (MSD)-based diffusion coefficients of a chosen molecular species.
 
 
 
@@ -12,11 +10,9 @@ computes one, two or three-dimensional mean squared displacements
 Installation
 ----------------------------------------
 
-VMD 1.9.2 or later is required. For installation instructions, please
-see [here](https://gist.github.com/tonigi/a9cfaf7642a7fbc13293).
+VMD 1.9.2 or later is required. For installation instructions, please see [here](https://gist.github.com/tonigi/a9cfaf7642a7fbc13293).
 
-To test, see the [regtest.tcl](../demo/regtest.tcl) script in the
-`demo` directory.
+To test, see the [regtest.tcl](../demo/regtest.tcl) script in the `demo` directory.
 
 
 Usage (GUI)
@@ -121,6 +117,11 @@ Notes
     Keffer, The Working Man's Guide to Obtaining Self Diffusion
     Coefficients from Molecular Dynamics
     Simulations](http://utkstair.org/clausius/docs/che548/pdf/selfD.pdf).
+
+-   The point-wise formula for *D* is only valid for small particles
+	in the diffusive (Brownian) regime. In general, you should instead
+	perform a linear fit of MSD over a range of τ values, and discard
+	the intercept (see [Martin et al., 2002](https://linkinghub.elsevier.com/retrieve/pii/S0006349502739714)). 
 
 -   Computing converged diffusion coefficients is likely beyond your
     sampling capacity and patience, unless done for plenty of
