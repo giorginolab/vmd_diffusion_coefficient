@@ -1,5 +1,5 @@
 # GUIBUILDER FILE Build 146
-# Created: 2019-08-28 14:02:59 by GUI Builder Build 146
+# Created: 2019-08-28 14:48:16 by GUI Builder Build 146
 language tcl 8.4
 widget {Tk frame} f {
 	geometry min_column {40 40}
@@ -37,13 +37,13 @@ widget {Tk frame} _frame_1 {
 	data level 1
 }
 widget {Tk frame} _frame_2 {
-	geometry -column 2
-	geometry -columnspan 1
+	geometry -column 1
+	geometry -columnspan 2
 	geometry -row 9
 	geometry -rowspan 1
 	geometry -sticky ew
 	geometry min_column {40 2 40}
-	geometry min_row {21 2}
+	geometry min_row {2 9}
 	geometry pad_column {0 0 0}
 	geometry pad_row {0 0}
 	geometry resize_column {0 3 3}
@@ -99,7 +99,7 @@ widget {Tk frame} _frame_4 {
 widget {Tk frame} _frame_6 {
 	geometry -column 1
 	geometry -columnspan 1
-	geometry -row 9
+	geometry -row 10
 	geometry -rowspan 1
 	geometry -sticky ew
 	geometry min_column {40 40}
@@ -124,7 +124,7 @@ widget {Tk label} _label_1 {
 	geometry -columnspan 2
 	geometry -row 1
 	geometry -rowspan 1
-	geometry -sticky {}
+	geometry -sticky ew
 	geometry min_column {2 40}
 	geometry min_row 2
 	geometry pad_column {0 0}
@@ -339,7 +339,7 @@ widget {Tk button} _button_3 {
 	configure -text {MSD displacement}
 	geometry -column 2
 	geometry -columnspan 1
-	geometry -row 1
+	geometry -row 2
 	geometry -rowspan 1
 	geometry -sticky nsew
 	geometry min_column {2 40}
@@ -360,7 +360,7 @@ widget {Tk button} _button_4 {
 	configure -text {Diffusion coefficient}
 	geometry -column 3
 	geometry -columnspan 1
-	geometry -row 1
+	geometry -row 2
 	geometry -rowspan 1
 	geometry -sticky nsew
 	geometry min_column {2 40}
@@ -594,8 +594,8 @@ widget {Tk label} _label_13 {
 	configure -font {helvetica 10}
 	configure -text Ready
 	configure -textvariable diffusion_coefficient::status_text
-	geometry -column 1
-	geometry -columnspan 2
+	geometry -column 2
+	geometry -columnspan 1
 	geometry -row 10
 	geometry -rowspan 1
 	geometry -sticky {}
@@ -765,10 +765,10 @@ widget {Tk button} _button_2 {
 widget {Tk label} _label_7 {
 	configure -font {helvetica 10}
 	configure -justify right
-	configure -text {Generate plot for...}
+	configure -text Plot...
 	geometry -column 1
 	geometry -columnspan 1
-	geometry -row 1
+	geometry -row 2
 	geometry -rowspan 1
 	geometry -sticky e
 	geometry min_column {2 40}
@@ -831,10 +831,10 @@ widget {Tk label} _label_16 {
 widget {Tk label} _label_17 {
 	configure -font {Helvetica 10}
 	configure -justify right
-	configure -text {Fit MSD and compute...}
+	configure -text Compute...
 	geometry -column 1
 	geometry -columnspan 1
-	geometry -row 2
+	geometry -row 1
 	geometry -rowspan 1
 	geometry -sticky e
 	geometry min_column {2 40}
@@ -851,11 +851,11 @@ widget {Tk label} _label_17 {
 	data TYPE {Tk label}
 }
 widget {Tk button} _button_6 {
-	configure -font {Helvetica 10}
-	configure -text {Diffusion coefficient}
+	configure -font {Helvetica 10 bold}
+	configure -text {Diffusion coefficient from linear MSD fit}
 	geometry -column 2
 	geometry -columnspan 2
-	geometry -row 2
+	geometry -row 1
 	geometry -rowspan 1
 	geometry -sticky nsew
 	geometry min_column {2 40}
