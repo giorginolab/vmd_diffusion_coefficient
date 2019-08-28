@@ -17,7 +17,7 @@ namespace eval ::diffusion_coefficient:: {
     # provides additional/different functionality.
     variable arg
     variable arg_defaults {
-	selection "water and name OH"
+	selection "water and noh"
 	dt		1
 	alongx		1  
 	alongy		1 
@@ -373,7 +373,7 @@ proc diffusion_coefficient::msd_fit {tau_list msd_list} {
      	     $fit_int \
      	     $fit_int_se]
 
-    set_status [format "Fit value: %.4g \xB1 %.4g \xC5\xB2/ns (intercept %.4g \xB1 %.4g \xC5\xB2)" {*}$out]
+    set_status [format "Fit value for D: %.4g \xB1 %.4g \xC5\xB2/ns (intercept %.4g \xB1 %.4g \xC5\xB2)" {*}$out]
     
     return $out
 }

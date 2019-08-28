@@ -425,12 +425,26 @@ proc diffusion_coefficient_gui::plot_msd_button_command args {
 
     if [ catch {
 	lassign [::diffusion_coefficient::compute_avg_msd] tlist msdlist
+	set ND [::diffusion_coefficient::nd]
 
-	multiplot -x $tlist -y $msdlist -plot \
-	    -title "Mean square displacement" \
-	    -xlabel "Lag time $utf8_tau (ns)" \
-	    -ylabel "MSD ($utf8_A2)" \
-	    -marker point -radius 2 -fillcolor "#ff0000" -color "#ff0000"
+	set fit [::diffusion_coefficient::msd_fit $tlist $msdlist]
+	set a [expr [lindex $fit 0] * 2 * $ND]
+	set b [lindex $fit 2]
+	set t0 [lindex $tlist 0]
+	set t1 [lindex $tlist end]
+	set y0 [expr $a * $t0 + $b]
+	set y1 [expr $a * $t1 + $b]
+	
+	set mpl [multiplot -x $tlist -y $msdlist -plot \
+		     -title "Mean square displacement with linear fit" \
+		     -xlabel "Lag time $utf8_tau (ns)" \
+		     -ylabel "MSD ($utf8_A2)" \
+		     -marker point -radius 2 -fillcolor "#ff0000" -color "#ff0000" ]
+
+	$mpl draw line $t0 $y0 $t1 $y1 -dash .
+	puts $mpl
+	puts "$mpl draw line $t0 $y0 $t1 $y1 -dash ."
+	
     } e ] {
 	tk_messageBox -title Error -message $e -icon error \
 	    -parent $diffusion_coefficient_window 
