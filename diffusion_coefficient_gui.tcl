@@ -88,8 +88,7 @@ VMD Diffusion Coefficient Tool
 
 Version [package versions diffusion_coefficient]
 
-Toni Giorgino <toni.giorgino@isib.cnr.it>
-Institute of Biomedical Engineering (ISIB)
+Toni Giorgino <toni.giorgino@cnr.it>
 National Research Council of Italy (CNR)
 
 Copyright (c) 2010-2012
