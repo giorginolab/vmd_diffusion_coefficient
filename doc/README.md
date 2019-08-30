@@ -73,10 +73,10 @@ Invocation is self-explanatory, i.e.:
                   Returns two lists of {tau} {MSD(tau)}
     -d range      Compute D(tau)=MSD(tau)/(2*D*tau) between -from and
                   -to (mandatory). Returns two lists of {tau} {D(tau)}
-	-fitD range   Compute D by a linear fit of MSD over the specified
-				  range. Returns a list of {D D_err S S_err} where
-				  D is the MSD slope divided by 2D; S is the MSD intercept; 
-				  and _err are the respective standard errors.
+    -fitD range   Compute D by a linear fit of MSD over the specified
+                  range. Returns a list of {D D_err S S_err} where
+                  D is the MSD slope divided by 2D; S is the MSD intercept; 
+                  and _err are the respective standard errors.
 
 
 The following table lists the correspondence between the GUI and
