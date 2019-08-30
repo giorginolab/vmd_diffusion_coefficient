@@ -51,7 +51,7 @@ coefficient can be obtained through Einstein's relation:
 
 $$ D(\tau) = M(\tau) / 2E\tau $$
 
-where $E$ is the (integer) dimensionality of the system. 
+where $E$ is the dimensionality of the system (integer, $1 \leq E \leq 3$). 
 In general, MSD values at multiple lag times are computed from the
 same trajectory to check their linearity and asymptotic slope in
 $\tau$ to check diffusivity and average out measurement errors
@@ -69,13 +69,15 @@ The diffusion coefficient tool can be used either interactively with
 its graphical user interface (GUI, Figure 1), or calling the 
 `diffusion_coefficient` procedure in VMD's embedded TCL language.
 
-The tool can compute either $M(\tau)$ ("MSD displacement" GUI button,
-or procedure argument `-msd`) or $D(\tau)$, valid as long as
-diffusivity holds ("Diffusion coefficient", or argument `-d`). $D$ and
-the corresponding error can also be computed via linear fit of the MSD
-(argument `-fitD`).  The results are either plotted (GUI) or returned as
-a list (procedure call).  The following table lists the correspondence
-between the GUI and procedure arguments.
+The tool can compute the following quantities:
+
+ * $M(\tau)$ ("MSD displacement" GUI button, or procedure argument `-msd`) 
+ * "Instantaneous" $D(\tau) = M(\tau)/2E\tau$, valid as long as diffusivity holds and position errors are small (button "Diffusion coefficient", argument `-d`) 
+ * $D$ (and its standard error) through least-squares fitting of $M(\tau)$ to $2 E D \tau + \sigma$  (button "Linear fit", argument `-fitD`).
+ 
+The results are either plotted (GUI) or returned as a list (procedure
+call).  The following table lists the correspondence between the GUI
+and procedure arguments.
 
 
 | GUI text            | Procedure argument | Default value          |
@@ -120,9 +122,8 @@ MEMBPLUGIN is a VMD plugin which implements additional analysis types
 specifically for quasi-planar bilayer simulations
 [@guixa-gonzalez_membrane_2016]. This tool's regression test is based
 on the case study trajectories provided with MEMBPLUGIN.
-
-The `gmx msd` command line utility is distributed with GROMACS and
-performs a similar MSD calculation from the shell
+The `gmx msd`  utility is distributed with GROMACS and
+performs a similar MSD calculation from the command line shell
 [@lemkul_proteins_2019].
 
 
