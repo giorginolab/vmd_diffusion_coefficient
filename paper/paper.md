@@ -105,7 +105,7 @@ by an *interval step*. The analysis is repeated for the chosen values
 of $\tau$, ranging from a minimum to a maximum, again with a stride.
 
 ![The interval selection parameters and time-averaging scheme. The MSD
-samples being averaged are indicated by shades of grey.](drawing.svg)
+samples being averaged are indicated by shades of grey.](drawing.pdf)
 
 Note that obtaining *converged* MSD values from MD simulations requires
 an aggregated sampling much larger than the characteristic time $\tau$.
