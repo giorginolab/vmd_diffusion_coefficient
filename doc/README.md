@@ -46,11 +46,16 @@ Usage (command line)
 
 You need to load the package with `package require diffusion_coefficient`. The plugin can perform the following computations
 
--   MSD at a given lag time (in frames). The return value will be in Å, and its value is independent of the time units. This is the clearest (i.e. recommended) way to use the plugin.
+-   MSD at a given lag time (in frames). The return value will be in
+    Å², and its value is independent of the time units. 
 
--   MSD for an interval of lag times
+-   MSD for an interval of lag times (`from`, `to`, `step` options)
 
--   D, computed as above, for an interval of lag times.
+-   D, computed as above, for an interval of lag times. The formula is
+	only valid in the diffusive regime and with pointlike particles
+
+-   D, computed by least-squares fitting MSD to a linear function in τ.
+	This is the most commonly used method.
 
 Invocation is self-explanatory, i.e.:
 
@@ -68,10 +73,14 @@ Invocation is self-explanatory, i.e.:
                   Returns two lists of {tau} {MSD(tau)}
     -d range      Compute D(tau)=MSD(tau)/(2*D*tau) between -from and
                   -to (mandatory). Returns two lists of {tau} {D(tau)}
+	-fitD range   Compute D by a linear fit of MSD over the specified
+				  range. Returns a list of {D D_err S S_err} where
+				  D is the MSD slope divided by 2D; S is the MSD intercept; 
+				  and _err are the respective standard errors.
 
 
-The following table lists the
-correspondence between the GUI and function arguments.
+The following table lists the correspondence between the GUI and
+function arguments.
 
 
 | GUI text            | Function argument | Default value          |
@@ -154,7 +163,7 @@ Citation
 
 Please cite the following publication:
 
-> Toni Giorgino, Computing diffusion coefficients in macromolecular simulations: the Diffusion Coefficient Tool for VMD, Submitted (2015). Available from [GitHub](https://github.com/giorginolab/vmd_diffusion_coefficient/).
+> Toni Giorgino, Computing diffusion coefficients in macromolecular simulations: the Diffusion Coefficient Tool for VMD, (2015). Available from [GitHub](https://github.com/giorginolab/vmd_diffusion_coefficient/).
 
 
 
@@ -172,8 +181,8 @@ site.
 License
 -------
 
-By downloading the software you agree to
-comply with the terms of the 3-clause BSD license.
+By downloading the software you agree to comply with the terms of the
+[3-clause BSD license](LICENSE-BSD).
 
 
 
