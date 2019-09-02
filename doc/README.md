@@ -172,7 +172,9 @@ Support
 
 **NOTE: This code comes without any warranty of fitness for any
 use. It is UNSUPPORTED.** 
-You may or may not be able to get support by posting to the [External
+You may be able to get support by opening an issue in 
+the tool's [GitHub repository](https://github.com/giorginolab/vmd_diffusion_coefficient/),
+or by posting to the [External
 tools](https://sourceforge.net/p/membplugin/discussion/external_tools/)
 forum hosted at the [MEMBPLUGIN](http://membplugin.sourceforge.net)
 site.
