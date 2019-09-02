@@ -38,13 +38,21 @@ set auto_path [linsert $auto_path 0 [file normalize ..] ]
 package require diffusion_coefficient
 
 
-# Lateral diffusion of POPC lipids
+# Lateral MSD of POPC lipids
 set popc_msd_xy [ diffusion_coefficient -dt 0.1 -alongx 1 -alongy 1 -alongz 0 -msd range -selection "resname POPC and name P" ]
 printout $popc_msd_xy popc_msd_xy.dat
 
-# Lateral diffusion of cholesterol
+# Lateral MSD of cholesterol
 set chl_msd_xy [ diffusion_coefficient -dt 0.1 -alongx 1 -alongy 1 -alongz 0 -msd range -selection "resname CHL1 and name C1" ]
 printout $chl_msd_xy chl_msd_xy.dat
+
+# Fitted diffusion coefficient of CHL
+set chl_fitD_xy [ diffusion_coefficient -dt 0.1 -alongx 1 -alongy 1 -alongz 0 -fitD range -selection "resname CHL1 and name C1" ]
+puts " "
+puts " "
+puts [format "Fitted CHL D over default range: %.2g ± %.2g Å²/ns, int. %.2g ± %.2g" {*}$chl_fitD_xy]
+puts [format "Expected:                        %.2g ± %.2g Å²/ns, int. %.2g ± %.2g" 0.549456 0.030907 12.46229 0.79994]
+
 
 
 # Diff
