@@ -187,12 +187,13 @@ By downloading the software you agree to comply with the terms of the
 [3-clause BSD license](LICENSE-BSD).
 
 
-
-
-
 Acknowledgments
 ---------------
 
-Former support from the Agència de Gestió d'Ajuts Universitaris i de
+The TCL linear fitting code is TCLLIB's [linear-model](https://tools.ietf.org/doc/tcllib/html/statistics.html#23) 
+function. Tcl/Tk [licensing terms](https://www.tcl.tk/software/tcltk/license.html) apply to it.
+
+Work on this software started while at the CBBL of the Universitat 
+Pompeu Fabra (GRIB-IMIM-UPF). Former support from the Agència de Gestió d'Ajuts Universitaris i de
 Recerca - Generalitat de Catalunya is gratefully acknowledged.
 
