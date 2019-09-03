@@ -184,7 +184,7 @@ License
 -------
 
 By downloading the software you agree to comply with the terms of the
-[3-clause BSD license](LICENSE-BSD). The TCL linear fitting code is 
+[3-clause BSD license](../LICENSE). The TCL linear fitting code is 
 reproduced from TCLLIB's [linear-model](https://tools.ietf.org/doc/tcllib/html/statistics.html#23) 
 function. Tcl/Tk [licensing terms](https://www.tcl.tk/software/tcltk/license.html) apply to it.
 
