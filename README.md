@@ -9,4 +9,8 @@ coefficients of a chosen molecular species.
 
 Please find this software's documentation in the [doc subdirectory](doc).
 
-See [LICENSE-BSD](doc/LICENSE-BSD) for licensing terms. 
+License
+-------
+
+This software is distributed subject to the BSD-3 licensing terms.
+Please refer to the accompanying [LICENSE](LICENSE) file. 
