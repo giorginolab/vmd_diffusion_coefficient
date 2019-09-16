@@ -12,7 +12,14 @@ Installation
 
 VMD 1.9.2 or later is required. For installation instructions, please see [here](https://gist.github.com/tonigi/a9cfaf7642a7fbc13293).
 
-To test, see the [regtest.tcl](../demo/regtest.tcl) script in the `demo` directory.
+To test, see the [regtest.tcl](../demo/regtest.tcl) script in the
+`demo` directory. The test computes the lateral diffusion coefficient of
+cholesterol in a 1:1 POPC:CHL membrane on the basis of pre-computed
+simulation data from the *Case Study* supplement of [Guixà-González et
+al.](http://doi.org/10.1093/bioinformatics/btu037). The result, 0.55 ±
+0.031 Å²/ns (at 310 °K), matches well the experimental value 
+of 5.5 10<sup>-12</sup> m²/s (at 308 °K)
+in [Filippov et al.](https://doi.org/10.1021/la034222x).
 
 
 Usage (GUI)
@@ -176,13 +183,13 @@ Support
 -------
 
 **NOTE: This code comes without any warranty of fitness for any
-use. It is UNSUPPORTED.** 
-You may be able to get support by opening an issue in 
-the tool's [GitHub repository](https://github.com/giorginolab/vmd_diffusion_coefficient/),
+use. It is UNSUPPORTED.** You may be able to get support by opening an
+issue in the tool's [GitHub
+repository](https://github.com/giorginolab/vmd_diffusion_coefficient/),
 or by posting to the [External
 tools](https://sourceforge.net/p/membplugin/discussion/external_tools/)
 forum hosted at the [MEMBPLUGIN](http://membplugin.sourceforge.net)
-site.
+site. Contributions may be provided via GitHub's *Pull Requests*.
 
 
 License
