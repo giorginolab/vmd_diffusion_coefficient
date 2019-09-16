@@ -8,12 +8,18 @@ The [Diffusion Coefficient Tool](#) is an analysis plugin for VMD that computes 
 
 
 Installation
-----------------------------------------
+------------
 
 VMD 1.9.2 or later is required. For installation instructions, please see [here](https://gist.github.com/tonigi/a9cfaf7642a7fbc13293).
 
+
+Test and example
+----------------
+
 To test, see the [regtest.tcl](../demo/regtest.tcl) script in the
-`demo` directory. The test computes the lateral diffusion coefficient
+`demo` directory. 
+
+The test computes the lateral diffusion coefficient
 of cholesterol in a 1:1 POPC:CHL membrane on the basis of pre-computed
 simulation data from the *Case Study* supplement of [Guixà-González et
 al.](http://doi.org/10.1093/bioinformatics/btu037). The result, 0.55 ±
