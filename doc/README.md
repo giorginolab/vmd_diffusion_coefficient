@@ -20,23 +20,13 @@ Usage (GUI)
 
 The plugin is accessible from VMD in *Extensions \> Analysis \> Diffusion Coefficient Tool*. The profile is computed for the currently loaded trajectory in the *top* molecule. The atom selection must match one atom per diffusing molecule; MSD values will be averaged over the matched atoms.
 
-Two buttons are provided to plot the **MSD displacement** MSD(τ) and the **Diffusion coefficient** D(τ). The latter is computed with the Einstein relation as *D(τ)=MSD(τ)/2Eτ*, where *E* is the integer dimensionality of the system (1, 2 or 3). (Note that it's not a linear fit.)
+Three buttons are provided to
+
+- plot the **MSD displacement** MSD(τ);
+- plot the "instantaneous" **Diffusion coefficient** D(τ). The latter is computed with the Einstein relation as *D(τ)=MSD(τ)/2Eτ*, where *E* is the integer dimensionality of the system (1, 2 or 3). (Note that it's not a linear fit.)
+- compute the **Diffusion coefficient from linear MSD fit**, which computes the MSD displacement and show its linear fit over the selected range of τ.
 
 The **Analysis interval** boxes allow to specify a subsection of the trajectory to be used for the MSD calculation. Only displacements in the subspace spanned by the **Diffusion along** axes will be considered. In other words, if *z* is deselected, motions along that axes will be irrelevant for the calculation of MSD and D.
-
-The results are given in Å<sup>2</sup>/ns. Conversion factors:
-
--   0.1 Å<sup>2</sup>/ns = 10<sup>-12</sup> m<sup>2</sup>/s = 10<sup>-8</sup> cm<sup>2</sup>/s = 1 μm<sup>2</sup>/s
-
--   1 cm²/s = 10<sup>7</sup> Å²/ns
-
--   1 m²/s = 10<sup>11</sup> Å²/ns
-
--   1 μm²/s = 0.1 Å²/ns
-
--   1 Å²/ns = 10<sup>-7</sup> cm²/s = 10<sup>-11</sup> m²/s = 10 μm²/s
-
-Upon completion, the location of a data file with the computed profiles will be printed on the console.
 
 
 
@@ -85,7 +75,7 @@ function arguments.
 
 | GUI text            | Function argument | Default value          |
 |---------------------|-------------------|------------------------|
-| Selection           | `-selection`      | `water and name OH`    |
+| Selection           | `-selection`      | `water and noh`    |
 | Diffusion along     | `-alongx`, etc.   | 3D                     |
 | Subtract drift      | `-remove_drift`   | Enabled                |
 | τ from              | `-from`           | Trajectory length / 10 |
@@ -109,6 +99,21 @@ Averaging
 | w<sub>t</sub> | Analysis interval to   | `-interval_to`      |
 | w<sub>s</sub> | Analysis interval step | `-interval_stride`  |
 
+
+Units
+-----
+
+The results are given in Å<sup>2</sup>/ns. Conversion factors:
+
+-   0.1 Å<sup>2</sup>/ns = 10<sup>-12</sup> m<sup>2</sup>/s = 10<sup>-8</sup> cm<sup>2</sup>/s = 1 μm<sup>2</sup>/s
+
+-   1 cm²/s = 10<sup>7</sup> Å²/ns
+
+-   1 m²/s = 10<sup>11</sup> Å²/ns
+
+-   1 μm²/s = 0.1 Å²/ns
+
+-   1 Å²/ns = 10<sup>-7</sup> cm²/s = 10<sup>-11</sup> m²/s = 10 μm²/s
 
 
 
