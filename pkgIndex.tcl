@@ -11,10 +11,10 @@
 package ifneeded diffusion_coefficient 1.0 [list source [file join $dir diffusion_coefficient.tcl]]
 package ifneeded diffusion_coefficient_gui 1.0 [list source [file join $dir diffusion_coefficient_gui.tcl]]
 
-catch {
-    source [file join $dir diffusion_coefficient_gui.tcl]
-    diffusion_coefficient_gui::register_menu
-}
+# catch {
+#     source [file join $dir diffusion_coefficient_gui.tcl]
+#     diffusion_coefficient_gui::register_menu
+# }
 
 # catch { package require diffusion_coefficient_gui; diffusion_coefficient_gui::register_menu; } 
 
