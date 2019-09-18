@@ -44,7 +44,8 @@ namespace eval ::diffusion_coefficient:: {
 
 
 # User-accessible proc
-proc diffusion_coefficient { args } { return [eval ::diffusion_coefficient::diffusion_coefficient $args] }
+proc diffusion_coefficient { args } {
+    return [eval ::diffusion_coefficient::diffusion_coefficient $args] }
 
 
 # Help
@@ -156,9 +157,27 @@ proc ::diffusion_coefficient::diffusion_coefficient {args} {
 	set dfit [msd_fit $tlist $msdlist]
 	return $dfit
     } else {
-	error "Unknown invokation type."
+	error "Unknown invocation type."
     }
 
+}
+
+
+# Save to file
+proc ::diffusion_coefficient::save_to_file {fn} {
+    lassign [compute_avg_msd] tlist msdlist
+    set dlist [msd_to_d $tlist $msdlist]
+    set dfit [msd_fit $tlist $msdlist]
+
+    set fp [open $fn w]
+    puts $fp "# Created with the Diffusion Coefficient Tool for VMD."
+    puts $fp "# Options:   [get_cli_equivalent]"
+    puts $fp [format "# Fit value for D (first two columns): %.4g \xB1 %.4g \xC5\xB2/ns (intercept %.4g \xB1 %.4g \xC5\xB2)" {*}$dfit]
+    puts $fp "# Tau MSD D"
+    foreach tau $tlist msd $msdlist d $dlist {
+	puts $fp [format "%.4f %.4f %.4f" $tau $msd $d]
+    }
+    close $fp
 }
 
 

@@ -495,7 +495,18 @@ proc diffusion_coefficient_gui::reset_lags_button_command args {
 # ARGS:
 #    <NONE>
 #
-proc diffusion_coefficient_gui::save_button_command args {}
+proc diffusion_coefficient_gui::save_button_command args {
+    variable diffusion_coefficient_window
+    variable abort_button
+    set fn [tk_getSaveFile -parent $diffusion_coefficient_window -filetypes {{{CSV Files} {.csv}} {{All files} *}} ]
+    if {$fn != ""} {
+	$abort_button configure -state normal
+	if [ catch {::diffusion_coefficient::save_to_file $fn} e] {
+	    tk_messageBox -title Error -message $e -icon error -parent $diffusion_coefficient_window
+	}
+	$abort_button configure -state disabled
+    }
+}
 
 # diffusion_coefficient_gui::abort_button_command --
 #
