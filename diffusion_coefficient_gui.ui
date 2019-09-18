@@ -1,5 +1,5 @@
 # GUIBUILDER FILE Build 146
-# Created: 2019-09-18 20:24:19 by GUI Builder Build 146
+# Created: 2019-09-18 20:38:53 by GUI Builder Build 146
 language tcl 8.4
 widget {Tk frame} f {
 	geometry min_column {40 40}
@@ -847,7 +847,7 @@ widget {Tk button} _button_6 {
 	geometry weight_column {1 1}
 	geometry weight_row 0
 	data GROUP Tk
-	data ID stop_button
+	data ID abort_button
 	data MASTER _frame_5
 	data TYPE {Tk button}
 }
