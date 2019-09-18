@@ -10,11 +10,7 @@
 package provide diffusion_coefficient 1.0
 
 namespace eval ::diffusion_coefficient:: {
-    # Variables matching command line options. Note to self: putting
-    # them in an array was not a good idea. It makes sense when there
-    # is a 1-to-1 correspondence between CLI arguments and GUI
-    # elements, but provides no advantage in this case, when the GUI
-    # provides additional/different functionality.
+    # Variables matching command line options. 
     variable arg
     variable arg_defaults {
 	selection "water and noh"
@@ -226,34 +222,45 @@ proc diffusion_coefficient::nd {} {
 }
 
 
+# Requires atomselect, axis ("x", "y" or "z"), start and end frames.
+# Returns the squared distance moved along that axis
+proc diffusion_coefficient::delta2_between {as axis t0 t1} {
+    variable arg
+    $as frame $t0
+    set v0 [$as get $axis]
+    $as frame $t1
+    set v1 [$as get $axis]
+    if {$arg(remove_drift)==1} {
+	set v0 [veccenter $v0]
+	set v1 [veccenter $v1]
+    }
+    set dv [vecsub $v1 $v0]
+    set dv2 [vecdot $dv $dv]
+    return $dv2
+}
 
 
-
-# Uses class-variables xt, yt, zt
-proc diffusion_coefficient::msd_between {t0 t1 } {
+# Uses the atomselect
+proc diffusion_coefficient::msd_between {as t0 t1} {
     variable arg
     set alongx $arg(alongx) 
     set alongy $arg(alongy)
     set alongz $arg(alongz)
 
-    variable xt;   variable yt;   variable zt
+    set N [$as num]
 
-    set N [llength [lindex $xt 0]]
     set dx2 0
     set dy2 0
     set dz2 0
     
     if {$alongx==1} {
-	set dx [vecsub [lindex $xt $t0] [lindex $xt $t1]]
-	set dx2 [vecdot $dx $dx]
+	set dx2 [delta2_between $as x $t0 $t1]
     }
     if {$alongy==1} {
-	set dy [vecsub [lindex $yt $t0] [lindex $yt $t1]]
-	set dy2 [vecdot $dy $dy]
+	set dy2 [delta2_between $as y $t0 $t1]
     }
     if {$alongz==1} {
-	set dz [vecsub [lindex $zt $t0] [lindex $zt $t1]]
-	set dz2 [vecdot $dz $dz]
+	set dz2 [delta2_between $as z $t0 $t1]
     }
     set msd [expr ($dx2+$dy2+$dz2)/$N ]
     return $msd
@@ -277,38 +284,17 @@ proc diffusion_coefficient::compute_avg_msd {} {
     set interval_stride $arg(interval_stride)
 
     set alongx $arg(alongx); set alongy $arg(alongy); set alongz $arg(alongz)
-    
-    variable xt;   variable yt;   variable zt
+
 
     check_selection
 
     set_status "Initializing"
+    
     set as [atomselect top $arg(selection)]
+    
     set T [molinfo top get numframes]
-    set N [$as num]
-
-
-    if {$to=="last"}		{ set to [expr $N-1] }
-    if {$interval_to=="last"}	{ set interval_to [expr $N-1] }
-
-    # make three monster arrays x/y/z arranged for easy indexing
-    # lindex $xt 4   returns the vector of all X's at time 4
-    set xt {};    set yt {};     set zt {}
-    for {set t 0} {$t<$T} {incr t} {
-	$as frame $t
-	set xvec [$as get x]
-	set yvec [$as get y]
-	set zvec [$as get z]
-	if {$arg(remove_drift)==1} {
-	    set xvec [veccenter $xvec]
-	    set yvec [veccenter $yvec]
-	    set zvec [veccenter $zvec]
-	}
-	lappend xt $xvec
-	lappend yt $yvec
-	lappend zt $zvec
-    }
-    $as delete
+    if {$to=="last"}		{ set to [expr $T-1] }
+    if {$interval_to=="last"}	{ set interval_to [expr $T-1] }
 
     # Form windows of varying sizes; ws=tau
     set tau_list {}
@@ -321,10 +307,10 @@ proc diffusion_coefficient::compute_avg_msd {} {
 	    {$t0<[expr $interval_to-$ws]} \
 	    {incr t0 $interval_stride} {
 		set t1 [expr $t0+$ws]
-		set msd [msd_between  $t0 $t1]
+		set msd [msd_between $as $t0 $t1]
 		set msdavg [expr $msdavg+$msd]
 		incr ns
-	    }
+	}
 
 	# convert frames into time units
 	set tau [expr $ws*$arg(dt)]
@@ -334,6 +320,8 @@ proc diffusion_coefficient::compute_avg_msd {} {
 	set_status [format "Computing: %2.0f%% done" \
 		    [expr 100.*($ws-$from+1)/($to-$from+1)] ]
     }
+
+    $as delete
 
     # return
     set_status "Ready"
