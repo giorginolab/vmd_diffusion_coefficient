@@ -26,7 +26,7 @@ source [file join $diffusion_coefficient_gui::SCRIPTDIR diffusion_coefficient_gu
 
 
 # This code is a mess because it can be loaded back in guibuilder.
-package provide diffusion_coefficient_gui 1.1
+package provide diffusion_coefficient_gui 1.2
 
 namespace eval diffusion_coefficient_gui {
     variable utf8_tau "\u03C4"
@@ -385,13 +385,23 @@ proc diffusion_coefficient_gui::plot_d_button_command args {
     if [ catch {
 	set ND [::diffusion_coefficient::nd]
 	lassign [::diffusion_coefficient::compute_avg_msd] tlist msdlist
+
+	set fit [::diffusion_coefficient::msd_fit $tlist $msdlist]
+	set a [lindex $fit 0]
+	set b [lindex $fit 2]
+	set t0 [lindex $tlist 0]
+	set t1 [lindex $tlist end]
+
 	set dlist [::diffusion_coefficient::msd_to_d $tlist $msdlist]
+
 	set title [format "%d-dimensional diffusion coefficient, D = MSD/(2*$ND*$utf8_tau)" $ND]
-	multiplot -x $tlist -y $dlist -plot \
-	    -title $title \
-	    -xlabel "Lag time $utf8_tau (ns)" \
-	    -ylabel "D ($utf8_A2/ns)" \
-	    -marker point -radius 2 -fillcolor "#ff0000" -color "#ff0000" 
+	set mpl [multiplot -x $tlist -y $dlist -plot \
+		     -title $title \
+		     -xlabel "Lag time $utf8_tau (ns)" \
+		     -ylabel "D ($utf8_A2/ns)" \
+		     -marker point -radius 2 -fillcolor "#ff0000" -color "#ff0000" ]
+	$mpl draw line $t0 $a $t1 $a -dash .
+	puts "	$mpl draw line $t0 $a $t1 $a -dash . "
     } e ] {
 	tk_messageBox -title Error -message $e -icon error \
 	    -parent $diffusion_coefficient_window 
@@ -411,11 +421,11 @@ proc diffusion_coefficient_gui::plot_msd_button_command args {
     variable utf8_A2
 
     if [ catch {
-	lassign [::diffusion_coefficient::compute_avg_msd] tlist msdlist
 	set ND [::diffusion_coefficient::nd]
-
+	lassign [::diffusion_coefficient::compute_avg_msd] tlist msdlist
+	
 	set fit [::diffusion_coefficient::msd_fit $tlist $msdlist]
-	set a [expr [lindex $fit 0] * 2 * $ND]
+	set a [expr 2.0 * $ND * [lindex $fit 0] ];	  # MSD = 2 E D tau
 	set b [lindex $fit 2]
 	set t0 [lindex $tlist 0]
 	set t1 [lindex $tlist end]
@@ -429,9 +439,6 @@ proc diffusion_coefficient_gui::plot_msd_button_command args {
 		     -marker point -radius 2 -fillcolor "#ff0000" -color "#ff0000" ]
 
 	$mpl draw line $t0 $y0 $t1 $y1 -dash .
-	puts $mpl
-	puts "$mpl draw line $t0 $y0 $t1 $y1 -dash ."
-	
     } e ] {
 	tk_messageBox -title Error -message $e -icon error \
 	    -parent $diffusion_coefficient_window 
