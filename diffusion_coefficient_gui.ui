@@ -1,5 +1,5 @@
 # GUIBUILDER FILE Build 146
-# Created: 2019-09-18 17:49:45 by GUI Builder Build 146
+# Created: 2019-09-18 20:24:19 by GUI Builder Build 146
 language tcl 8.4
 widget {Tk frame} f {
 	geometry min_column {40 40}
@@ -102,13 +102,13 @@ widget {Tk frame} _frame_5 {
 	geometry -row 9
 	geometry -rowspan 1
 	geometry -sticky news
-	geometry min_column {40 40}
+	geometry min_column {16 2 2 2}
 	geometry min_row 2
-	geometry pad_column {0 0}
+	geometry pad_column {0 0 0 0}
 	geometry pad_row 0
-	geometry resize_column {3 3}
+	geometry resize_column {3 3 0 0}
 	geometry resize_row 0
-	geometry weight_column {1 1}
+	geometry weight_column {1 1 0 0}
 	geometry weight_row 0
 	data GROUP Tk
 	data ID _frame_5
@@ -269,7 +269,7 @@ widget {Tk label} _label_5 {
 }
 widget {Tk checkbutton} _checkbutton_1 {
 	configure -font {helvetica 10}
-	configure -text x
+	configure -text { x}
 	configure -variable diffusion_coefficient::arg(alongx)
 	geometry -column 1
 	geometry -columnspan 1
@@ -291,7 +291,7 @@ widget {Tk checkbutton} _checkbutton_1 {
 }
 widget {Tk checkbutton} _checkbutton_2 {
 	configure -font {helvetica 10}
-	configure -text y
+	configure -text { y}
 	configure -variable diffusion_coefficient::arg(alongy)
 	geometry -column 2
 	geometry -columnspan 1
@@ -314,7 +314,7 @@ widget {Tk checkbutton} _checkbutton_2 {
 widget {Tk checkbutton} _checkbutton_3 {
 	configure -font {helvetica 10}
 	configure -takefocus 1
-	configure -text z
+	configure -text { z}
 	configure -variable diffusion_coefficient::arg(alongz)
 	geometry -column 3
 	geometry -columnspan 1
@@ -700,7 +700,7 @@ widget {Tk entry} _entry_8 {
 }
 widget {Tk checkbutton} _checkbutton_4 {
 	configure -font {helvetica 10}
-	configure -text {Subtract center of mass drift}
+	configure -text { Subtract center of mass drift}
 	configure -variable diffusion_coefficient::arg(remove_drift)
 	geometry -column 4
 	geometry -columnspan 1
@@ -809,7 +809,7 @@ widget {Tk button} _button_5 {
 }
 widget {Tk label} _label_16 {
 	configure -font {Helvetica 13}
-	configure -text Help
+	configure -text Documentation
 	geometry -column 2
 	geometry -columnspan 1
 	geometry -row 1
@@ -827,6 +827,50 @@ widget {Tk label} _label_16 {
 	data ID _label_16
 	data MASTER _frame_6
 	data TYPE {Tk label}
+}
+widget {Tk button} _button_6 {
+	configure -bitmap error
+	configure -foreground #ff0000
+	configure -state disabled
+	configure -text _button_6
+	geometry -column 4
+	geometry -columnspan 1
+	geometry -row 1
+	geometry -rowspan 1
+	geometry -sticky {}
+	geometry min_column {2 40}
+	geometry min_row 2
+	geometry pad_column {0 0}
+	geometry pad_row 0
+	geometry resize_column {3 3}
+	geometry resize_row 0
+	geometry weight_column {1 1}
+	geometry weight_row 0
+	data GROUP Tk
+	data ID stop_button
+	data MASTER _frame_5
+	data TYPE {Tk button}
+}
+widget {Tk button} _button_7 {
+	configure -bitmap gray50
+	configure -text _button_7
+	geometry -column 3
+	geometry -columnspan 1
+	geometry -row 1
+	geometry -rowspan 1
+	geometry -sticky {}
+	geometry min_column {2 40}
+	geometry min_row 2
+	geometry pad_column {0 0}
+	geometry pad_row 0
+	geometry resize_column {3 3}
+	geometry resize_row 0
+	geometry weight_column {1 1}
+	geometry weight_row 0
+	data GROUP Tk
+	data ID save_button
+	data MASTER _frame_5
+	data TYPE {Tk button}
 }
 menu {Menu menu} MENU {
 	data MASTER {}

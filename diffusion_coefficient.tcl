@@ -37,6 +37,9 @@ namespace eval ::diffusion_coefficient:: {
 
     # Status text, bound by the GUI, otherwise unused
     variable status_text
+
+    # If set the computations stops
+    variable abort_flag 0
 }
 
 
@@ -286,6 +289,7 @@ proc diffusion_coefficient::msd_between {as t0 t1} {
 # http://www.ncbi.nlm.nih.gov/pmc/articles/PMC1303338/
 proc diffusion_coefficient::compute_avg_msd {} {
     variable arg
+    variable abort_flag
 
     set from $arg(from)
     set to $arg(to)
@@ -328,7 +332,14 @@ proc diffusion_coefficient::compute_avg_msd {} {
 	lappend msd_list [expr 1.*$msdavg/$ns]
 
 	set_status [format "Computing: %2.0f%% done" \
-		    [expr 100.*($ws-$from+1)/($to-$from+1)] ]
+			[expr 100.*($ws-$from+1)/($to-$from+1)] ]
+
+	if {$abort_flag == 1} {
+	    set abort_flag 0
+	    set_status "Aborted."
+	    $as delete
+	    error Aborted.
+	}
     }
 
     $as delete
