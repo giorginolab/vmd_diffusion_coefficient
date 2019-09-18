@@ -34,11 +34,13 @@ Usage (GUI)
 
 The plugin is accessible from VMD in *Extensions \> Analysis \> Diffusion Coefficient Tool*. The profile is computed for the currently loaded trajectory in the *top* molecule. The atom selection must match one atom per diffusing molecule; MSD values will be averaged over the matched atoms.
 
-Three buttons are provided to
+Buttons are provided to
 
 - plot the **MSD displacement** MSD(τ);
-- plot the "instantaneous" **Diffusion coefficient** D(τ). The latter is computed with the Einstein relation as *D(τ)=MSD(τ)/2Eτ*, where *E* is the integer dimensionality of the system (1, 2 or 3). (Note that it's not a linear fit.)
-- compute the **Diffusion coefficient from linear MSD fit**, which computes the MSD displacement and show its linear fit over the selected range of τ.
+- plot the "instantaneous" **Diffusion coefficient** D(τ). The latter is computed with the Einstein relation as *D(τ)=MSD(τ)/2Eτ*, where *E* is the integer dimensionality of the system (1, 2 or 3). (Note that it's not a linear fit.);
+- save the results of the computation to a CSV file.
+
+In all cases, a linear fit of the MSD displacement over the selected range of τ is performed and the results (with standard error) are output on the status line,  standard output, or written to the CSV file header as appropriate.
 
 The **Analysis interval** boxes allow to specify a subsection of the trajectory to be used for the MSD calculation. Only displacements in the subspace spanned by the **Diffusion along** axes will be considered. In other words, if *z* is deselected, motions along that axes will be irrelevant for the calculation of MSD and D.
 
