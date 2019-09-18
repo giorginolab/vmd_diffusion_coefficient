@@ -7,7 +7,7 @@
 # Toni Giorgino, ISIB-Consiglio Nazionale delle Ricerche, 2012
 # https://github.com/giorginolab/vmd_diffusion_coefficient/
 
-package provide diffusion_coefficient 1.1
+package provide diffusion_coefficient 1.2
 
 namespace eval ::diffusion_coefficient:: {
     # Variables matching command line options. 
@@ -75,7 +75,7 @@ Toni Giorgino, National Research Council of Italy.
 
 Options (with defaults):"
     foreach k $arg_list {
-	puts "   -$k \"$arg($k)\""
+	puts "   -$k [list $arg($k)]"
     }
 
 }
@@ -101,6 +101,17 @@ proc ::diffusion_coefficient::parse_args {args} {
 	    error "Unknown command: $a"
 	}
     }
+}
+
+
+proc ::diffusion_coefficient::get_cli_equivalent {} {
+    variable arg
+    variable arg_list
+    
+    foreach k $arg_list {
+	append cli "-$k [list $arg($k)] "
+    }
+    return $cli
 }
 
 
@@ -285,7 +296,6 @@ proc diffusion_coefficient::compute_avg_msd {} {
 
     set alongx $arg(alongx); set alongy $arg(alongy); set alongz $arg(alongz)
 
-
     check_selection
 
     set_status "Initializing"
@@ -334,7 +344,7 @@ proc diffusion_coefficient::compute_avg_msd {} {
 proc diffusion_coefficient::msd_to_d {tau_list msd_list} {
     variable arg
 
-    set dt $arg(dt)
+    set dt $arg(dt);		# not needed- we get real times in
     foreach tau $tau_list msd $msd_list {
 	lappend d_list [expr $msd/2.0/$tau/[nd]]
     }
@@ -347,7 +357,7 @@ proc diffusion_coefficient::msd_to_d {tau_list msd_list} {
 proc diffusion_coefficient::msd_fit {tau_list msd_list} {
     variable arg
 
-    set dt $arg(dt)
+    set dt $arg(dt);		# not needed- we get real times in
 
     set fit [linear-model $tau_list $msd_list 1]
     set fit_slope [lindex $fit 1]

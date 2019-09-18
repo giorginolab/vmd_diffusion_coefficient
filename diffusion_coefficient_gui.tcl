@@ -383,6 +383,8 @@ proc diffusion_coefficient_gui::plot_d_button_command args {
     variable utf8_A2
 
     if [ catch {
+	puts "diffusion_coefficient) Equivalent command: diffusion_coefficient -d range [::diffusion_coefficient::get_cli_equivalent]"
+	
 	set ND [::diffusion_coefficient::nd]
 	lassign [::diffusion_coefficient::compute_avg_msd] tlist msdlist
 
@@ -401,7 +403,7 @@ proc diffusion_coefficient_gui::plot_d_button_command args {
 		     -ylabel "D ($utf8_A2/ns)" \
 		     -marker point -radius 2 -fillcolor "#ff0000" -color "#ff0000" ]
 	$mpl draw line $t0 $a $t1 $a -dash .
-	puts "	$mpl draw line $t0 $a $t1 $a -dash . "
+	# puts "	$mpl draw line $t0 $a $t1 $a -dash . "
     } e ] {
 	tk_messageBox -title Error -message $e -icon error \
 	    -parent $diffusion_coefficient_window 
@@ -421,6 +423,8 @@ proc diffusion_coefficient_gui::plot_msd_button_command args {
     variable utf8_A2
 
     if [ catch {
+	puts "diffusion_coefficient) Equivalent command: diffusion_coefficient -msd range [::diffusion_coefficient::get_cli_equivalent]"
+
 	set ND [::diffusion_coefficient::nd]
 	lassign [::diffusion_coefficient::compute_avg_msd] tlist msdlist
 	
