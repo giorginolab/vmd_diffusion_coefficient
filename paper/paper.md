@@ -120,7 +120,7 @@ atom per diffusing molecule, for MSD values to be averaged over.
 
 MEMBPLUGIN is a VMD plugin which implements additional analysis types
 specifically for quasi-planar bilayer simulations
-[@guixa-gonzalez_membrane_2016]. This tool's regression test is based
+[@guixa-gonzalez_membplugin:_2014]. This tool's regression test is based
 on the case study trajectories provided with MEMBPLUGIN.
 The `gmx msd`  utility is distributed with GROMACS and
 performs a similar MSD calculation from the command line shell
