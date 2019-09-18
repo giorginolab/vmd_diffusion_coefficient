@@ -11,6 +11,11 @@
 package ifneeded diffusion_coefficient 1.2 [list source [file join $dir diffusion_coefficient.tcl]]
 package ifneeded diffusion_coefficient_gui 1.2 [list source [file join $dir diffusion_coefficient_gui.tcl]]
 
+
+# The package used to misuse this file to register the plugin as
+# follows.  However, this does not work reliably in every
+# configuration.  Sourcing the included load.tcl file is safer.
+
 # catch {
 #     source [file join $dir diffusion_coefficient_gui.tcl]
 #     diffusion_coefficient_gui::register_menu
