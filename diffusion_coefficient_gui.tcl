@@ -31,7 +31,62 @@ namespace eval diffusion_coefficient_gui {
     variable utf8_tau "\u03C4"
     variable utf8_A2 "\uc5\ub2"
     variable already_registered 0
-    variable abort_button .diffusion_coefficient.abort_button
+
+    variable w .diffusion_coefficient
+    variable abort_button $w.abort_button
+    # http://www.small-icons.com/packs/24x24-free-application-icons.htm
+    variable save_icon_data {
+	R0lGODlhGAAYAHcAACH5BAEAAA4ALAAAAAAYABgAp+bo5/f3+CprsN7Z1v///mV7l4igtmu+6t/g
+	4fDx8dXT1Ojp6ePk5dvc3QEAAP///xdarP/9+dXW2Ozt7f3+/mzF8HXK8XnN8hxhr1y77OLj5YLS
+	9X3V+byvstDR04La/9HS1H3S9Nze3vX29hyc5VtVX2xmc3HH8N3f4Pj5+Gm756Ganf39/ozZ+Pn5
+	+n3O9JyPkPP19JLT8UI5RjuLzPb49+bm5ce+wWVebXZxfFyt4rWrrmK/7v//+zSJzrnl+qvd9nrV
+	/jN9xHDJ8hWa5H52hkm17uvs7dLu/Oze2yui5yFsu/j7+U1HVFVOXOHi46upsz6u6zgxO6akr0Sy
+	7KueotnZ2+/w8DKn5zmr6b+1uGd7l1W16LWmpo6Lkkit5leCpLSnqLiqrGmSuKqdn2fI9nfQ+aWZ
+	mS1usiWe5VGr5NjX15WEf4qiuK+ipPv7/GTI+oTV9aGUlWt5kcK3trq3uvz+/VCp4Pr6+vv7+y93
+	vnvT+WvK90hBTWfD8nOJpW/M9+Tg3NTU13PO9/Ds6zin5PXy7yhyvEKp5ZONlYDU9VC26kKf3Gqz
+	2pSRm4XP7yKa3szt+3tzgIDN7rPh99DQ0qCWmenq7Cl3wz+b2jGi4o3Z9tfW1/z8/F5WY6/g90yg
+	21KAo1R+n7Xk+IzR8I6JmtPLzl226kea1s7N0Fy/8Eyx55jV8nNvfc3FyNfY2TWDxzeP0jmFyUOi
+	4IeBkYDV+0ppg1F/pTGFysvAw8LAx3nJ7Pr9+6WeoBxotouHl9ra3IR/j1C67vHy8vn39VO46lSv
+	5FKt5kSh30uz6ESW1JyUlt/h4puZoPr7+kKU0kCQ0NbX2NfW2tbV2GfD71a87yx7xla668Xt/7y4
+	utDFyT1PZU+37mjC8CdzwC59yHG43NTKzOvp52a+7L7o+Vmz5tja29DIy8S5vNrZ2GjA773r/zqT
+	1Cig4IB6hIuFj53X8yZwvp+dp23I7rzn+6Xa86DY9GPB8MDp+0md2dnY2D6r5YWBidXU1TyX2AAA
+	AAj/ABGtykBQhYoDCBMqVKGj2CkHEL9EQoJvXZIeETJq7PGg44Mk2MYdg1gOySZFHM7FSMCyZY0V
+	vVYoMMWhBRc1DoyRCxGHg6srE4IKJWYLXKMV4TjEsalDDb0QG/bcOLKgqlVDYD58sKRtz4YNLWbd
+	+XHhhRl0ABioXUtIVK0gy3KZefFiA7KxFi4M0qIBgd+/4kJ9CALjxqALF0IwAjVqiAVAHVA0mEzZ
+	xjYwtxJpAWQhb6Z8lCqc4LPDioTTqK3UyVbHww4+J05Y8IfqE7UKZaroU8C7dz9Oa9akq1KmQoUh
+	7JQB4eEHzp82BqJLn97mDxw/6irEegZE1Zg5WwqI/x9PXvyWOWPudfMBrZ6wLg8IyJ9Pn/6DLtV4
+	+KBhzwgdFyO44AIeebzxRicsJEgBBXngQQc3GeBCAzxUdMCELlBMIU8zjnjxDj/uSJKDCV7Y0YER
+	13wjCytRiDFCADDGKOOMYlCxiDWwyJBFGCzFMEINKaTAhDO82LEgBSkME0YUyWAihAxYuHEFFL8E
+	U0QrJuBQghNN9DGDFCXE4EYWX3gjBClKkHEJMK9IE800gggCAggeeFBJKiAcQQYW+8SjxyNpnGED
+	AIQWauihZyhRyBJ6TEKCHAxMUQotRYyIgydcegnmAnKkockSh+xCBAwimNOACCKg4BczTzyhwasI
+	oCkAAwnt+ILBPESwEcgAvPbqq6+BsEECJBBgAEGxaAig7LLMMouGsccGBAA7
+    }
+    variable stop_icon_data {
+	R0lGODlhGAAYAHcAACH5BAEAAAAALAAAAAAYABgApwEAAP////RiS/RxVaUBA+4VEvJGSe4WEu0N
+	D/R5W/RyV+4bE+4TEfR1WfbFyPRuUvZ6XfR6XesYC/mdgfRqTO4XEvR2Wd0GAe4cEu4QEPILDvR3
+	WsorK/RkSvBFQeIZIsUVFuaqr6IBBe4PD8cKCvRyVe4YE+4SEJgAA+IGAe4REPAgFe0LDvR1WO0M
+	DsMGCeyIj6wBBfEuNfBEPugKAOZCRuIWDuU4OZIAAu9DQe0rMvZ8X/EeEvUiHPDIzfEcFO9VUug6
+	O/FVVfRpT7sDB4sAAfEbEssAAO0OD/AYEe8TEfYaGvEfFOxdYuguNfArM98AAO8YE/mcgvRzWPZ5
+	XOQHAKAAA+4ZE+1vdu4SEdFfYekWCPIKDu4YEvR5WvRxU+aHifR4WtFKS/EbDv339fEcD/RuUMYX
+	Gd8KAvRpS9wRDeE3OcoSFPMhDcsYGfmxmfR0WfMTEvmzmvZNNcwLDPRsTrADBtArLvmcgfMbDuxC
+	P+wuNu8dFPRvVOQRBs4RFONBRskJCuQLB+8XEtAIC7sTFdsfIPE/RPWBYfMhFMkRE/RyVvAYDtEq
+	Ke0tNeYrMvJWVvV3WOQtKsIMEPYJDvRmTPmIb+gqMvRrUPMkFvNYV/NjSMgRD/mhhPhEM+8VEvJH
+	SvRtUuMQCfislfEZEtEPEvRtUPMOEPFARvmokPRvT/RtTM4JC/MIDvmqlP34+PZnS/QaE/IpEPmw
+	luE0K/CdpfB7g/AVDPQMDu8tNew5KfN5W/gVGfZvU/mnjvIMDuc2OfZQON44PLoQEeILDuAAAPmc
+	gOQAAOE4PdkcGfiEa/RzV/QpHvPIzb0UFtcVEPmPddoGAPIhFr4FCOg9QO/T1fMXE/QQEPV+XfIf
+	FNoxNcEcHPV5W/NAMOYOAuMMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+	AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+	AAj/AAEIHCjjkIGDCA2AQiVjoEOHTzTJMTah4gQpUvB08tDw4cAnkN7s2AGhJAQqVHYlQOQhl0cA
+	OoTMghChZs0EOBN4CYPNg6OHMUdtCKNzg1ELSBs0aAGHW449Ay8BcbXUgtIWU6YsU8B1gNcSkXI4
+	AfAISKoSi7gq8Mp2wJcvD+KGelBCjxNqvvqYoVBH1SoKgE09SLOpEqYhHRIP6QWsBjQBkCNLnkz5
+	Rg1LtgK8ChAigOcAMBx8djAjABnPM24AUlYrADFBKYqJhgIlQJNjTQJ8CBAkSIAZa4TBQuYZhp8t
+	zQLQoBHggqwLugNgwRJAkqFSwbZoK+7NR4AqVQKo/2kDffdnCYT+zLmTjA7nb95TpAgA5giYABIC
+	cJAgIRMrNrp05lkjaFTTXDSieeYALfrlsYI0gSjSDSdaaEECBjZsw4ENiRwhhhggiPIMB8MYscAP
+	JEziCQ9ljMHECitkwwMTfPzAyC1JLGBEEqREEUUsL8TgBjMYFLnAkQtccYUJJnRRQQUHRPmJNSTY
+	AUAMZ/QwSJNPRnlAAWCCyQADSsQR5EAigNCDEmGOyUAWWZxwggoZZHDNCyI8ZAUIS6gwZ50jBIoE
+	EgggcMo0KLyEgjNLuFBooS64wMKkuBCR6EsA4FAILxr8osGnXHDRCiVE4IDpQEWIQMCqrK5qRREe
+	BQEEADs=
+    }
 }
 
 # VMD-specific stuff
@@ -45,6 +100,16 @@ if { $diffusion_coefficient_gui::in_vmd } {
     array set ::diffusion_coefficient::arg {}
 }
 
+
+# Tweak the icon
+proc diffusion_coefficient_gui::fixup_ui_icons {} {
+    variable w
+    image create photo SaveGIF -data $diffusion_coefficient_gui::save_icon_data
+    image create photo StopGIF -data $diffusion_coefficient_gui::stop_icon_data
+    $w.save_button configure -image SaveGIF
+    $w.abort_button configure -image StopGIF
+}
+ 
 
 
 # Register menu if possible
@@ -69,6 +134,7 @@ proc diffusion_coefficient_gui::diffusion_coefficient_tk {} {
 	set diffusion_coefficient_window [ toplevel ".diffusion_coefficient" ]
 	wm title $diffusion_coefficient_window "Diffusion Coefficient Tool"
 	diffusion_coefficient_gui::ui $diffusion_coefficient_window; # diffusion_coefficient_gui::init is now obsolete
+	fixup_ui_icons
     }
     reset_interval_button_command
     reset_lags_button_command

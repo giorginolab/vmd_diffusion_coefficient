@@ -10,12 +10,14 @@ The [Diffusion Coefficient Tool](#) is an analysis plugin for VMD that computes 
 Installation
 ------------
 
-VMD 1.9.2 or later is required. For installation instructions, please see [here](https://gist.github.com/tonigi/a9cfaf7642a7fbc13293).
+VMD 1.9.2 or later is required. For installation instructions, follow
+Method 1 explained
+[here](https://gist.github.com/tonigi/a9cfaf7642a7fbc13293).
+The statement to add in the custom dialog is:
 
-The plugin tries (mis)uses TCL's `auto_path` mechanism to register
-itself with VMD's Extensions menu. This does not work in all
-environments. In case of problems, the `load.tcl` file lists the
-required steps explicitly.
+    source /path/to/vmd_diffusion_coefficient/load.tcl
+
+
 
 
 Test and example
