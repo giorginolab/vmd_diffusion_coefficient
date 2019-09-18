@@ -35,7 +35,7 @@ species from simulated trajectories.
 
 Diffusion coefficients are computed on the basis of time- and
 ensemble-averaged squared displacement (MSD) of the chosen molecular
-specie.  The MSD $M(\tau)$ is defined by fixing an arbitrary time
+species.  The MSD $M(\tau)$ is defined by fixing an arbitrary time
 origin and a *lag time* $\tau$ as the mean displacement over that
 interval:
 

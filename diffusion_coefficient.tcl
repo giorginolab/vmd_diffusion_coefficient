@@ -7,7 +7,7 @@
 # Toni Giorgino, ISIB-Consiglio Nazionale delle Ricerche, 2012
 # https://github.com/giorginolab/vmd_diffusion_coefficient/
 
-package provide diffusion_coefficient 1.0
+package provide diffusion_coefficient 1.1
 
 namespace eval ::diffusion_coefficient:: {
     # Variables matching command line options. 
