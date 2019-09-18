@@ -138,7 +138,6 @@ proc diffusion_coefficient_gui::diffusion_coefficient_tk {} {
     }
     reset_interval_button_command
     reset_lags_button_command
-#    pack $diffusion_coefficient_window.menu.menuitem1 -side right
     return $diffusion_coefficient_window
 }
 

@@ -17,6 +17,8 @@ The statement to add in the custom dialog is:
 
     source /path/to/vmd_diffusion_coefficient/load.tcl
 
+The same command can be used in VMD's Tk Console to load the plugin 
+manually.
 
 
 
@@ -24,7 +26,9 @@ Test and example
 ----------------
 
 To test, see the [regtest.tcl](../demo/regtest.tcl) script in the
-`demo` directory. 
+`demo` directory.  E.g., in VMD's Tk Console, issue
+
+    play regtest.tcl
 
 The test computes the lateral diffusion coefficient
 of cholesterol in a 1:1 POPC:CHL membrane on the basis of pre-computed
