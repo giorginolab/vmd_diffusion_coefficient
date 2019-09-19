@@ -195,9 +195,9 @@ Citation
 
 Please cite the following publication:
 
-> Toni Giorgino, Computing diffusion coefficients in macromolecular simulations: the Diffusion Coefficient Tool for VMD, (2019). Journal of Open Source Software (under review). [doi:10.21105.joss.01698](http://doi.org/doi:10.21105.joss.01698) Available from [GitHub](https://github.com/giorginolab/vmd_diffusion_coefficient/). 
+> Toni Giorgino, Computing diffusion coefficients in macromolecular simulations: the Diffusion Coefficient Tool for VMD. Journal of Open Source Software, 4(41), 1698, [doi:10.21105.joss.01698](http://doi.org/doi:10.21105.joss.01698) Available from [GitHub](https://github.com/giorginolab/vmd_diffusion_coefficient/). 
 
-
+[![DOI](https://joss.theoj.org/papers/10.21105/joss.01698/status.svg)](https://doi.org/10.21105/joss.01698)
 
 Support
 -------
