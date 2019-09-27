@@ -14,7 +14,7 @@ Please find this software's documentation in the [doc subdirectory](doc).
 Citation
 --------
 
-Giorgino, (2019). Computing diffusion coefficients in macromolecular simulations: the Diffusion Coefficient Tool for VMD. Journal of Open Source Software, 4(41), 1698, https://doi.org/10.21105/joss.01698
+Giorgino, (2019). Computing diffusion coefficients in macromolecular simulations: the Diffusion Coefficient Tool for VMD. Journal of Open Source Software, 4(41), 1698, [doi:10.21105/joss.01698](https://doi.org/10.21105/joss.01698)
 
 
 License
